@@ -41,6 +41,29 @@
   border: 1px solid black;
 }
 
+#cajaHerramienta {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#zona1 {
+  flex-basis: 50%;
+}
+
+#zona2 {
+  flex-basis: 50%;
+}
+
+.inputsforms{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.inputsforms input{
+  width: 200px;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
