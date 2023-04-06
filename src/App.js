@@ -11,17 +11,32 @@ import Register from './Register';
 
 function App() {
 
-  const [productos, setProductos] = useState(mockdata)
+  const [herramientas, setHerramientas] = useState([]);
+  const [carga, setCarga]=useState(true);
+
+  useEffect(() => {
+    async function fetchData(){
+      await fetch('/api/herramientas')
+      .then(response => response.json())
+      .then(data => setHerramientas(data));
+      setTimeout(() => {
+        setCarga(false);
+      }, 500);
+    }
+    fetchData();
+  },[]);
 
   return (
     <div className="App">
       <Header/>
-        <Routes>
-          <Route path={"/"} element={<Principal allproducts={productos.products}/>}/>
-          <Route path={"/herramientas/:productId"} element={<Herramientas allproducts={productos.products}/>}/>
-          <Route path={"/login"} element={<Login/>}/>
-          <Route path={"/register"} element={<Register/>}/>
-        </Routes>
+      {carga ? <img width="200px" height="200px" id='loading' className='spinner' src='spinner.gif'/> : 
+      <Routes>
+        <Route path={"/"} element={<Principal tools={herramientas}/>}/>
+        <Route path={"/herramientas/:productId"} element={<Herramientas tools={herramientas}/>}/>
+        <Route path={"/login"} element={<Login/>}/>
+        <Route path={"/register"} element={<Register/>}/>
+      </Routes>
+      }
     </div>
   );
 }

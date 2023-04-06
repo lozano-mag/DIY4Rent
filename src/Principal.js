@@ -4,9 +4,9 @@ import Lista from "./Lista";
 
 export default function Principal(props){
     
-    const [productos, setProductos]=useState(props.allproducts);
+    const [herramientas, setProductos]=useState(props.tools);
     const [busqueda, setBusqueda]=useState("");
-    const allCategories=props.allproducts.map(item=>item.category);
+    const allCategories=props.tools.map(item=>item.categoria);
     const finalCategorias = allCategories.reduce((todasCategorias, categoria) => {
         if(!todasCategorias.includes(categoria)){
             return[...todasCategorias,categoria];
@@ -16,16 +16,16 @@ export default function Principal(props){
 
     function filtroNombre(){
         let productosFiltrados=[];
-        productosFiltrados=props.allproducts.filter(product=>product.title.toLowerCase().includes(busqueda));
+        productosFiltrados=props.tools.filter(tool => tool.nombre.toLowerCase().includes(busqueda));
         setProductos(productosFiltrados);
     }
 
     function filtroCategoria(categoria){
         let productosFiltrados = [];
         if(categoria=='Todas'){
-            setProductos(props.allproducts);
+            setProductos(props.tools);
         }else{
-            productosFiltrados=props.allproducts.filter(product=>product.category===categoria);
+            productosFiltrados=props.tools.filter(product=>product.categoria===categoria);
             setProductos(productosFiltrados);
         }
     }
@@ -42,7 +42,7 @@ export default function Principal(props){
             </select>
             <input type="string" onChange={e => setBusqueda(e.target.value)}></input>
             <button onClick={()=>filtroNombre()}>Buscar</button>
-            <Lista productos={productos}/>
+            <Lista tools={herramientas}/>
         </div>
     )
 }

@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom"
 export default function Lista(props){
     return(<div id="listaHerramientas">
-        {props.productos.map((item) => {
+        {console.log(props.tools)}
+        {props.tools.map((item) => {
             return(
                 <Link to={"/herramientas/" + item.id}><div class="tarjeta" onClick={()=>console.log(item.id)}>
                     <div class="imagenHerramienta">
-                        <img height="290px" width='300px' src={item.images[0]}></img>
+                        <img height="290px" width='300px' src={item.foto}></img>
                     </div>
                     <div class="tituloHerramienta">
-                        <p>{item.title}</p>
+                        <p>{item.nombre}</p>
                     </div>
                 </div></Link>
             )

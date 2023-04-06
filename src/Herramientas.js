@@ -4,28 +4,28 @@ import Lista from "./Lista";
 
 export default function Herramientas(props){
     let {productId}=useParams();
-    let listarecomendadossinf = props.allproducts.filter(product=>product.category===props.allproducts[productId - 1].category);
-    let listarecomendados = listarecomendadossinf.filter(product=>product.id!=props.allproducts[productId - 1].id);
+    let listarecomendadossinf = props.tools.filter(product=>product.categoria===props.tools[productId - 1].categoria);
+    let listarecomendados = listarecomendadossinf.filter(product=>product.id!=props.tools[productId - 1].id);
     return(
         <div id="cajaHerramienta">
             <div id="zona1">
-                <img src={props.allproducts[productId - 1].images[0]}></img>
+                <img src={props.tools[productId - 1].foto}></img>
                 <img></img>
                 <p>Propietario</p>
                 <button>Contactar con propietario</button>
             </div>
             <div id="zona2">
                 <div>
-                    <h2><b>{props.allproducts[productId - 1].title}</b></h2>
+                    <h2><b>{props.tools[productId - 1].nombre}</b></h2>
                     <b>Estado:</b>
-                    <p>{props.allproducts[productId - 1].category}</p>
+                    <p>{props.tools[productId - 1].categoria}</p>
                 </div>
-                <p>{props.allproducts[productId - 1].description}</p>
-                <p><b>{props.allproducts[productId - 1].price}€/dia</b></p>
+                <p>{props.tools[productId - 1].descripcion}</p>
+                <p><b>{props.tools[productId - 1].precio}€/dia</b></p>
             </div>
-            
+            <Lista tools={listarecomendados}/>
             <p>Otras herramientas recomendadas</p>
-            <Lista productos={listarecomendados}/>
+            
         </div>
     )
 }
