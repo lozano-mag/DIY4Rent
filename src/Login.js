@@ -9,7 +9,7 @@ export default function Login(){
                 <input placeholder="contraseña"></input>
             </div>
             <Link to={"/register"}><button>Registrarse</button></Link>
-            <button>Entrar</button>
+            <Link to={"/dashboard"}><button>Entrar</button></Link>
         </div>
     </div>)
 }
