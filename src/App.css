@@ -104,6 +104,63 @@
 
 #zona2 {
   flex-basis: 50%;
+  text-align: left;
+}
+
+#fotoHerramientaPrincipal{
+  margin-top: 30px;
+  margin-right: 80px;
+  border-radius: 10px;
+}
+
+#precio{
+  font-size: 30px;
+}
+
+#encabezadoPagHerramienta{
+  display: flex;
+  flex: wrap;
+}
+
+#encabezadoPagHerramienta p{
+  margin-top: 28px;
+  margin-left: 70px;
+}
+
+#iraUser{
+  display: flex;
+  flex-flow: row wrap;
+  margin-left: 120px;
+  margin-top: 20px;
+  width: 400px;
+}
+
+#iraUser img{
+  border-radius: 50px;
+  border: solid #ed5c25;
+}
+
+#iraUser p{
+  font-size: 18px;
+  margin-top: 42px;
+  margin-left: -50px;
+  flex-basis: 50%;
+}
+
+#listaRecomendados{
+  margin-top: 30px;
+  margin-left: 100px;
+  background-color: #f1f3f2;
+  padding-right: 1300px;
+  border-radius: 20px;
+}
+
+#introRecomendados{
+  margin-right: -10px;
+}
+
+#tarjetasRecomendados{
+  margin-left: 40px;
 }
 
 .inputsforms{
@@ -121,13 +178,7 @@
   height: 300px;
 }
 
-.herramientaLista{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#login h2{
+.login h2{
   font-size: 40px;
 }
 
@@ -136,6 +187,37 @@
   width: 25%;
   margin: auto;
   border-radius: 20px;
+}
+
+.formularioEditar{
+  background-color: #dde1e0;
+  width: 35%;
+  margin: auto;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  
+}
+
+.formularioEditar label{
+  margin-top: 25px;
+  flex: 1;
+  margin-right: 10px;
+  text-align: left;
+}
+
+.formularioEditar input{
+  margin-top: 20px;
+  width: 300px;
+  height: 25px;
+  border-radius: 10px;
+  
+}
+
+#editarUsuario h2{
+  font-size: 40px;
 }
 
 .formularioLogin input{
@@ -191,4 +273,132 @@
 
 #registro h2{
   font-size: 40px;
+}
+
+.inputEditar{
+  display: flex;
+  flex-direction: row;
+}
+
+#dashboard{
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboardZona1{
+  margin-top: 40px;
+  display: flex;
+  flex-direction: row;
+}
+
+.dashboardZona1 img{
+  margin-left: 80px;
+}
+
+#dashboardDatos{
+  margin-left: 40px;
+}
+
+#dashboardDatos h2{
+  font-size: 40px;
+}
+
+#subirDashboard{
+  margin-top: 75px;
+  text-align: right ;
+  margin-right: 100px;
+}
+
+.loginSubirDashboard{
+  margin-top: 30px;
+  margin-bottom: 40px;
+  margin-top: 20px;
+  width: 175px;
+  height: 65px;
+  border-radius: 10px;
+  border: solid black;
+  background-color: #ed5c25;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#dashboardZona2{
+  margin-top: 40px;
+  text-align: left;
+  margin-left: 80px;
+  background-color: #dde1e0;
+  border-radius: 20px;
+  margin-right: 80px;
+}
+
+#dashboardZona2 p{
+  margin-left: 20px;
+}
+
+#tituloDashboardZona2{
+  font-size: 20px;
+}
+
+#dashboardZona3{
+  margin-top: 40px;
+  text-align: left;
+  margin-left: 80px;
+  background-color: #dde1e0;
+  border-radius: 20px;
+  margin-right: 80px;
+}
+
+#dashboardZona3 img{
+  border-radius: 10px;
+}
+
+#tituloDashboardZona3{
+  margin-left: 20px;
+  font-size: 20px;
+}
+
+.herramientaLista{
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+
+.herramientaLista p{
+  margin-left: 35px;
+}
+
+.botonesListaMisHerramientas{
+  margin-top: 20px;
+  margin-left: 100px;
+  float: right;
+}
+
+.botonesListaMisHerramientas button{
+  margin-right: 40px;
+}
+
+.profilePhoto{
+  border-radius: 1000px;
+  border: solid gainsboro;
+}
+
+#otrasHerramientas{
+  margin-top: 70px;
+  background-color: #f1f3f2;
+  margin-left: 50px;
+  margin-right: 50px;
+  border-radius: 20px;
+}
+
+#otrasHerramientasTitulo{
+  text-align: left;
+  margin-left: 60px;
+  font-size: 20px;
+}
+
+#otrasHerramientasTarjetas{
+  margin-top: 40px;
 }

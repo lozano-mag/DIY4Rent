@@ -38,7 +38,7 @@ function App() {
   return (
     <div className="App">
       <Header/>
-      {carga ? <img width="200px" height="200px" id='loading' className='spinner' src='spinner.gif'/> : 
+      {carga ? <img id='loading' className='spinner' src='spinner.gif'/> : 
       <Routes>
         <Route path={"/"} element={<Principal tools={herramientas}/>}/>
         <Route path={"/herramientas/:productId"} element={<Herramientas users={usuarios} tools={herramientas}/>}/>
