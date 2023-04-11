@@ -23,7 +23,7 @@ export default function Register() {
 
     if (nombre == "" | correo == "" | telefono == "" | correoPaypal == "" | direccion == "" | pass == "") {
       alert("Rellena todos los campos")
-    } else if (usuario.pass != repass) {
+    } else if (pass != repass) {
       alert('Las contraseñas no coinciden!')
     } else {
 
@@ -37,6 +37,8 @@ export default function Register() {
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error(error));
+
+        window.location.href = '/login';
     }
   };
 

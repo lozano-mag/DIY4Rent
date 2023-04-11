@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function EditarHerramientas(props) {
 
@@ -62,6 +63,7 @@ export default function EditarHerramientas(props) {
       .then(response => response.json())
       .then(data => console.log(data))
       .catch(error => console.error(error));
+    window.location.href = '/dashboard';
   }
 
   return (<div id="editarUsuario">

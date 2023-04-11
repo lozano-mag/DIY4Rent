@@ -59,6 +59,8 @@ export default function SubirHerramienta() {
         .then(response => response.json())
         .then(data => console.log(data))
         .catch(error => console.error(error));
+
+      window.location.href = '/dashboard';
     }
   }
 

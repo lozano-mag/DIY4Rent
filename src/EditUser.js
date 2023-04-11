@@ -28,7 +28,7 @@ export default function EditUser(props) {
       password: pass
     };
 
-    if (usuario.pass != repass) {
+    if (pass != repass) {
       alert('Las contraseñas no coinciden!')
     } else {
 
@@ -43,6 +43,7 @@ export default function EditUser(props) {
         .then(data => console.log(data))
         .catch(error => console.error(error));
 
+      window.location.href = '/dashboard';
     }
 
   };

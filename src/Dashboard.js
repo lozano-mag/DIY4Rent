@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom"
 import ListaAlquiladas from "./ListaAlquiladas"
 import ListaMisHerramientas from "./ListaMisHerramientas"
+import { useEffect, useState } from "react";
 
 export default function Dashboard(props) {
+
     let herramientas = props.tools.filter(product => product.userId == 1);
     return (<div id="dashboard">
         <div className="dashboardZona1">
