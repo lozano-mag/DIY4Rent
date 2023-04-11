@@ -9,6 +9,7 @@ export default function Register() {
   const [correoPaypal, setCorreoPaypal] = useState("");
   const [direccion, setDireccion] = useState();
   const [pass, setPass] = useState("");
+  const [repass, setRepass] = useState("");
 
   const guardarUsuario = () => {
     const usuario = {
@@ -20,16 +21,23 @@ export default function Register() {
       password: pass
     };
 
-    fetch("/api/usuarios", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(usuario)
-    })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
+    if (nombre == "" | correo == "" | telefono == "" | correoPaypal == "" | direccion == "" | pass == "") {
+      alert("Rellena todos los campos")
+    } else if (usuario.pass != repass) {
+      alert('Las contraseñas no coinciden!')
+    } else {
+
+      fetch("/api/usuarios", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(usuario)
+      })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+    }
   };
 
   return (<div id="registro">
@@ -38,11 +46,11 @@ export default function Register() {
       <div className="inputsforms">
         <input placeholder="correo" onChange={e => setCorreo(e.target.value)}></input>
         <input placeholder="nombre" onChange={e => setNombre(e.target.value)}></input>
-        <input placeholder="tlf" onChange={e => setTelefono(e.target.value)}></input>
+        <input placeholder="tlf" type="number" onChange={e => setTelefono(e.target.value)}></input>
         <input placeholder="dirección" onChange={e => setDireccion(e.target.value)}></input>
         <input placeholder="correo paypal" onChange={e => setCorreoPaypal(e.target.value)}></input>
-        <input placeholder="contraseña" onChange={e => setPass(e.target.value)}></input>
-        <input placeholder="repetir contraseña"></input>
+        <input placeholder="contraseña" onChange={e => setPass(e.target.value)} type="password"></input>
+        <input placeholder="repetir contraseña" onChange={e => setRepass(e.target.value)} type="password"></input>
       </div>
       <div>
         <button className="registerSignIn" onClick={() => guardarUsuario()}>Registrarse</button>

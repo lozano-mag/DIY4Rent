@@ -6,7 +6,7 @@ export default function Login(){
         <div className="formularioLogin">
             <div className="inputsforms">
                 <input placeholder="correo"></input>
-                <input placeholder="contraseña"></input>
+                <input placeholder="contraseña" type="password"></input>
             </div>
             <Link to={"/register"}><button className="loginRegister">Registrarse</button></Link>
             <Link to={"/dashboard"}><button className="loginEnter">Entrar</button></Link>

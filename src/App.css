@@ -402,3 +402,13 @@
 #otrasHerramientasTarjetas{
   margin-top: 40px;
 }
+
+.SelectorEditar{
+  margin-top: 20px;
+}
+
+.SelectorEditar select{
+  width: 90px;
+  height: 30px;
+  border-radius: 10px;
+}

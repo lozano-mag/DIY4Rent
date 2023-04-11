@@ -15,6 +15,7 @@ export default function EditUser(props) {
   const [correoPaypal, setCorreoPaypal] = useState(user.correoPaypal);
   const [direccion, setDireccion] = useState(user.direccion);
   const [pass, setPass] = useState(user.password);
+  const [repass, setRepass] = useState("");
 
 
   const guardarUsuario = () => {
@@ -26,16 +27,23 @@ export default function EditUser(props) {
       direccion: direccion,
       password: pass
     };
-    fetch(`/api/usuarios/${userId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(usuario)
-    })
-      .then(response => response.json())
-      .then(data => console.log(data))
-      .catch(error => console.error(error));
+
+    if (usuario.pass != repass) {
+      alert('Las contraseñas no coinciden!')
+    } else {
+
+      fetch(`/api/usuarios/${userId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(usuario)
+      })
+        .then(response => response.json())
+        .then(data => console.log(data))
+        .catch(error => console.error(error));
+
+    }
 
   };
 
@@ -65,15 +73,15 @@ export default function EditUser(props) {
         </div>
         <div className="inputEditar">
           <label>Contraseña:</label>
-          <input placeholder={pass} onChange={e => setPass(e.target.value)}></input>
+          <input placeholder="Contraseña" onChange={e => setPass(e.target.value)} type="password"></input>
         </div>
         <div className="inputEditar">
           <label>Repetir contraseña:</label>
-          <input placeholder="repetir contraseña"></input>
+          <input placeholder="Repetir contraseña" onChange={e => setRepass(e.target.value)} type="password"></input>
         </div>
       </div>
       <button className="loginEnter" onClick={() => guardarUsuario()}>Editar</button>
     </div>
-    
+
   </div>)
 }
