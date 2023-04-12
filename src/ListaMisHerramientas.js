@@ -24,14 +24,14 @@ export default function ListaMisHerramientas(props) {
 
     return (<div>
         {misherramientas.map((item) => {
-            return (<div className="herramientaLista">
+            return (<Link to={`/herramientas/${item.id}`}><div className="herramientaLista">
                 <img src={item.foto} height="100px" width='100px'></img>
                 <p>{item.nombre}</p>
                 <div className="botonesListaMisHerramientas">
                     <Link to={"/herramienta_edit/" + item.id}><button className="loginEnter">Editar</button></Link>
                     <button className="loginRegister" onClick={() => eliminarHerramienta(item.id)}>Eliminar</button>
                 </div>
-            </div>)
+            </div></Link>)
         })}
     </div>)
 }
