@@ -3,6 +3,7 @@ import { useState } from "react";
 
 export default function Register() {
 
+  const [fotoUser, setFoto] = useState(null);
   const [nombre, setNombre] = useState("");
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState();
@@ -10,9 +11,36 @@ export default function Register() {
   const [direccion, setDireccion] = useState();
   const [pass, setPass] = useState("");
   const [repass, setRepass] = useState("");
+  const [archivo, setArchivo] = useState(null);
+  const [imagenUrl, setImagenUrl] = useState(null);
+
+  const uploadImage = async (archivo) => {
+    const formData = new FormData();
+    formData.append('file', archivo);
+
+    try {
+      const response = await fetch('/api/upload-image', {
+        method: 'POST',
+        body: formData
+      });
+
+      if (response.ok) {
+        const data = await response.text();
+        console.log(data);
+        console.log(archivo);
+        setImagenUrl(`http://localhost:8080/api/images/${archivo.name}`);
+        setFoto(`http://localhost:8080/api/images/${archivo.name}`);
+      } else {
+        console.log('Error al subir la imagen.');
+      }
+    } catch (error) {
+      console.error(error)
+    }
+  }
 
   const guardarUsuario = () => {
     const usuario = {
+      fotoUser: fotoUser,
       nombre: nombre,
       correo: correo,
       telefono: telefono,
@@ -38,7 +66,7 @@ export default function Register() {
         .then(data => console.log(data))
         .catch(error => console.error(error));
 
-        window.location.href = '/login';
+      window.location.href = '/login';
     }
   };
 
@@ -51,6 +79,9 @@ export default function Register() {
         <input placeholder="tlf" type="number" onChange={e => setTelefono(e.target.value)}></input>
         <input placeholder="dirección" onChange={e => setDireccion(e.target.value)}></input>
         <input placeholder="correo paypal" onChange={e => setCorreoPaypal(e.target.value)}></input>
+        <input type="file" onChange={e => setArchivo(e.target.files[0])}></input>
+        <img src={imagenUrl} width="50px" height="50px"></img>
+        <button onClick={() => uploadImage(archivo)}>Adjuntar imagen seleccionada</button>
         <input placeholder="contraseña" onChange={e => setPass(e.target.value)} type="password"></input>
         <input placeholder="repetir contraseña" onChange={e => setRepass(e.target.value)} type="password"></input>
       </div>

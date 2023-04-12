@@ -99,9 +99,6 @@ export default function EditarHerramientas(props) {
           <img src={imagenUrl} width="50px" height="50px"></img>
           <button onClick={() => uploadImage(archivo)}>Adjuntar imagen seleccionada</button>
         </div>
-        <div className="inputEditar">
-          <label>URL de la foto de la herramienta</label>
-          <input placeholder={herramienta.foto} onChange={e => setFoto(e.target.value)}></input></div>
         <button className="loginEnter" onClick={() => guardarHerramienta()}>Editar</button>
       </div>
     </div>

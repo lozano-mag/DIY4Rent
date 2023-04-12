@@ -9,6 +9,7 @@ export default function Lista(props){
                     </div>
                     <div>
                         <p><b>{item.nombre}</b></p>
+                        <p><b>{item.precio}€/día</b></p>
                     </div>
                 </div></Link>
             )

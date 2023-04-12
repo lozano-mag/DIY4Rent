@@ -47,7 +47,7 @@
   align-items: center;
 }
 
-#barraBusqueda input{
+#filtroNombre{
   margin-top: 20px;
   width: 500px;
   padding: 10px;
@@ -55,7 +55,7 @@
   font-size: 16px;
 }
 
-#barraBusqueda button{
+#botonfiltroNombre{
   margin-top: 20px;
   width: 100px;
   height: 40px;
@@ -411,4 +411,19 @@
   width: 90px;
   height: 30px;
   border-radius: 10px;
+}
+
+#filtroPrecio{
+  width: 200px;
+  height: 20px;
+  border-radius: 20px;
+}
+
+#botonFiltroPrecio{
+ margin-right: 50px;
+ margin-left: 10px;
+ height: 30px;
+ border-radius: 20px;
+ background-color: black;
+ color: white;
 }

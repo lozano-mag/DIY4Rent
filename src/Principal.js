@@ -6,6 +6,8 @@ export default function Principal(props) {
 
     const [herramientas, setProductos] = useState(props.tools);
     const [busqueda, setBusqueda] = useState("");
+    const [precioBusqueda, setPrecio] = useState("");
+
     const allCategories = props.tools.map(item => item.categoria);
     const finalCategorias = allCategories.reduce((todasCategorias, categoria) => {
         if (!todasCategorias.includes(categoria)) {
@@ -18,6 +20,12 @@ export default function Principal(props) {
         let productosFiltrados = [];
         productosFiltrados = props.tools.filter(tool => tool.nombre.toLowerCase().includes(busqueda));
         setProductos(productosFiltrados);
+    }
+
+    function filtroPrecio() {
+        let productosFiltrados = [];
+        productosFiltrados = props.tools.filter(tool => tool.precio <= precioBusqueda);
+        setProductos(productosFiltrados)
     }
 
     function filtroCategoria(categoria) {
@@ -33,6 +41,8 @@ export default function Principal(props) {
     return (
         <div id="pagBusqueda">
             <div id="barraBusqueda">
+                <input id="filtroPrecio" placeholder="Max Precio (€/día)" onChange={e => setPrecio(e.target.value)}></input>
+                <button id="botonFiltroPrecio" onClick={() => filtroPrecio()}>Filtrar</button>
                 <select id="selectorCategorias" onChange={e => filtroCategoria(e.target.value)}>
                     <option key={0}>Todas</option>
                     {finalCategorias.map((item, index) => {
@@ -41,8 +51,8 @@ export default function Principal(props) {
                         )
                     })}
                 </select>
-                <input type="string" onChange={e => setBusqueda(e.target.value)}></input>
-                <button onClick={() => filtroNombre()}><b>Buscar</b></button>
+                <input id="filtroNombre" type="string" onChange={e => setBusqueda(e.target.value)}></input>
+                <button id="botonfiltroNombre" onClick={() => filtroNombre()}><b>Buscar</b></button>
             </div>
             <Lista tools={herramientas} />
         </div>

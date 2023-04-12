@@ -40,7 +40,10 @@ export default function Herramientas(props) {
             }
         }
         fetchData();
+
     }, [propietario.direccion]);
+
+
 
     return (
         <div id="cajaHerramienta">
@@ -56,7 +59,12 @@ export default function Herramientas(props) {
             <div id="zona2">
                 <div id="encabezadoPagHerramienta">
                     <h2><b>{herramienta.nombre}</b></h2>
-                    <p><b>Estado: {herramienta.estadoDesgaste}</b></p>
+                    <p><b>
+                        Estado: {" "}
+                        {herramienta.estadoDesgaste === 1 && "Excelente"}
+                        {herramienta.estadoDesgaste === 2 && "Bueno"}
+                        {herramienta.estadoDesgaste === 3 && "Regular"}
+                    </b></p>
                     <p>Categoria: {herramienta.categoria}</p>
                 </div>
                 <p>{herramienta.descripcion}</p>
