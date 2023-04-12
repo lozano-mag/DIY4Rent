@@ -415,16 +415,23 @@
 }
 
 #filtroPrecio{
+  margin-top: 20px;
   width: 200px;
-  height: 20px;
+  padding: 10px;
   border-radius: 20px;
+  font-size: 16px;
 }
 
 #botonFiltroPrecio{
- margin-right: 50px;
- margin-left: 10px;
- height: 30px;
- border-radius: 20px;
- background-color: black;
- color: white;
+  margin-top: 20px;
+  width: 100px;
+  height: 40px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
 }
