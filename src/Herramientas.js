@@ -47,6 +47,7 @@ export default function Herramientas(props) {
 
     return (
         <div id="cajaHerramienta">
+            {console.log(position)}
             <div id="zona1">
                 <img id="fotoHerramientaPrincipal" src={herramienta.foto} height="500px" width='600px'></img>
                 <Link to={"/usuarios/" + propietario.id}>

@@ -40,7 +40,7 @@ function App() {
       <Header/>
       {carga ? <img id='loading' className='spinner' src='spinner.gif'/> : 
       <Routes>
-        <Route path={"/"} element={<Principal tools={herramientas}/>}/>
+        <Route path={"/"} element={<Principal tools={herramientas} users={usuarios}/>}/>
         <Route path={"/herramientas/:productId"} element={<Herramientas users={usuarios} tools={herramientas}/>}/>
         <Route path={"/login"} element={<Login/>}/>
         <Route path={"/register"} element={<Register/>}/>

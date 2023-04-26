@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Register() {
 
@@ -13,6 +13,8 @@ export default function Register() {
   const [repass, setRepass] = useState("");
   const [archivo, setArchivo] = useState(null);
   const [imagenUrl, setImagenUrl] = useState(null);
+  const [carga, setCarga] = useState(false);
+  const [posicion, setPosition] = useState([1, 1]);
 
   const uploadImage = async (archivo) => {
     const formData = new FormData();
@@ -38,7 +40,30 @@ export default function Register() {
     }
   }
 
+  async function getCoordinates(address) {
+    const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${address}&format=json`);
+    const data = await response.json();
+    if (data.length === 0) {
+      throw new Error('No se encontraron coordenadas para la dirección proporcionada');
+    }
+    return {
+      lat: data[0].lat,
+      lon: data[0].lon,
+    };
+  }
+
+  async function fetchData() {
+    try {
+      setPosition(await getCoordinates(direccion));
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   const guardarUsuario = () => {
+
+    console.log(posicion)
+
     const usuario = {
       fotoUser: fotoUser,
       nombre: nombre,
@@ -46,6 +71,8 @@ export default function Register() {
       telefono: telefono,
       correoPaypal: correoPaypal,
       direccion: direccion,
+      lat: posicion.lat,
+      lon: posicion.lon,
       password: pass
     };
 
@@ -66,9 +93,13 @@ export default function Register() {
         .then(data => console.log(data))
         .catch(error => console.error(error));
 
-      window.location.href = '/login';
+        window.location.href = '/login';
     }
   };
+
+  useEffect(() => {
+    fetchData();
+  }, [direccion]);
 
   return (<div id="registro">
     <h2>Registro</h2>
