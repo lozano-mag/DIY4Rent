@@ -15,7 +15,6 @@ export default function UserPage(props) {
     useEffect(() => {
         const puntuacionMediaUser = () => {
             let puntuacionesFiltradasUserId = props.puntuaciones.filter(usuario => usuario.userId == user.id);
-            console.log(puntuacionesFiltradasUserId);
             let puntuacionTotal = 0;
             let nValoraciones = 0;
             let puntMedia = 0;
