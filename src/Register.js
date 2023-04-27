@@ -62,7 +62,9 @@ export default function Register() {
 
   const sacaLatyLon = (dir) => {
     setDireccion(dir);
-    fetchData(dir);
+    setTimeout(() => {
+      fetchData(dir);
+    }, 500)
   }
 
   const guardarUsuario = () => {
@@ -98,7 +100,7 @@ export default function Register() {
         .then(data => console.log(data))
         .catch(error => console.error(error));
 
-        window.location.href = '/login';
+      window.location.href = '/login';
     }
   };
 
