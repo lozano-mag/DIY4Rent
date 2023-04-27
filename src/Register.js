@@ -8,11 +8,11 @@ export default function Register() {
   const [correo, setCorreo] = useState("");
   const [telefono, setTelefono] = useState();
   const [correoPaypal, setCorreoPaypal] = useState("");
-  const [direccion, setDireccion] = useState();
   const [pass, setPass] = useState("");
   const [repass, setRepass] = useState("");
   const [archivo, setArchivo] = useState(null);
   const [imagenUrl, setImagenUrl] = useState(null);
+  const [direccion, setDireccion] = useState("");
   const [carga, setCarga] = useState(false);
   const [posicion, setPosition] = useState([1, 1]);
 
@@ -52,12 +52,17 @@ export default function Register() {
     };
   }
 
-  async function fetchData() {
+  async function fetchData(dir) {
     try {
-      setPosition(await getCoordinates(direccion));
+      setPosition(await getCoordinates(dir));
     } catch (error) {
       console.log(error);
     }
+  }
+
+  const sacaLatyLon = (dir) => {
+    setDireccion(dir);
+    fetchData(dir);
   }
 
   const guardarUsuario = () => {
@@ -97,10 +102,6 @@ export default function Register() {
     }
   };
 
-  useEffect(() => {
-    fetchData();
-  }, [direccion]);
-
   return (<div id="registro">
     <h2>Registro</h2>
     <div className="formularioLogin">
@@ -108,7 +109,7 @@ export default function Register() {
         <input placeholder="correo" onChange={e => setCorreo(e.target.value)}></input>
         <input placeholder="nombre" onChange={e => setNombre(e.target.value)}></input>
         <input placeholder="tlf" type="number" onChange={e => setTelefono(e.target.value)}></input>
-        <input placeholder="dirección" onChange={e => setDireccion(e.target.value)}></input>
+        <input placeholder="dirección" onChange={e => sacaLatyLon(e.target.value)}></input>
         <input placeholder="correo paypal" onChange={e => setCorreoPaypal(e.target.value)}></input>
         <input type="file" onChange={e => setArchivo(e.target.files[0])}></input>
         <img src={imagenUrl} width="50px" height="50px"></img>
