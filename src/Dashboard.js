@@ -12,7 +12,6 @@ export default function Dashboard(props) {
     useEffect(() => {
         const puntuacionMediaUser = () => {
             let puntuacionesFiltradasUserId = props.puntuaciones.filter(usuario => usuario.userId == props.users[0].id);
-            console.log(puntuacionesFiltradasUserId);
             let puntuacionTotal = 0;
             let nValoraciones = 0;
             let puntuacionMedia = 0;
