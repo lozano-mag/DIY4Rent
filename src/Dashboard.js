@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard(props) {
     const [puntuacionMedia, setPuntuacionMedia] = useState(0);
-    const [estrellas, setEstrellas] = useState(0);
+    const [estrellas, setEstrellas] = useState("");
 
     let herramientas = props.tools.filter(product => product.userId == 1);
     
