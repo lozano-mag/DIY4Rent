@@ -9,6 +9,9 @@ export default function Herramientas(props) {
     let { productId } = useParams();
 
     const [position, setPosition] = useState([1, 1]);
+    
+    const [puntuacionMedia, setPuntuacionMedia] = useState(0);
+    const [estrellas, setEstrellas] = useState("");
 
     let herramientaList = props.tools.filter(product => product.id == productId);
     let herramienta = herramientaList[0];
@@ -43,7 +46,31 @@ export default function Herramientas(props) {
 
     }, [propietario.direccion]);
 
+    useEffect(() => {
+        const puntuacionMediaUser = () => {
+            let puntuacionesFiltradasUserId = props.puntuaciones.filter(usuario => usuario.userId == propietario.id);
+            console.log(puntuacionesFiltradasUserId);
+            let puntuacionTotal = 0;
+            let nValoraciones = 0;
+            let puntuacionMedia = 0;
+            puntuacionesFiltradasUserId.map(puntuaciones => {
+                puntuacionTotal +=  puntuaciones.puntuacion;
+                nValoraciones++;
+            })
+            puntuacionMedia = Math.floor(puntuacionTotal/nValoraciones);
+            return puntuacionMedia;
+            
+        }
+        setPuntuacionMedia(puntuacionMediaUser());
+    }, [propietario.id, props.puntuaciones]);
 
+    useEffect(() =>{
+        const estrellasMedia = () => {
+            const rutaEstrellas = `/${puntuacionMedia}estrellas.png`;
+            return rutaEstrellas;
+        }
+        setEstrellas(estrellasMedia());
+    });
 
     return (
         <div id="cajaHerramienta">
@@ -54,6 +81,8 @@ export default function Herramientas(props) {
                     <div id="iraUser">
                         <img src={propietario.fotoUser} height="100px" width="100px"></img>
                         <p><b>{propietario.nombre}</b></p>
+                        <img src={estrellas}></img>
+                        <p><b>Puntuación: {puntuacionMedia}</b></p>
                     </div>
                 </Link>
             </div>
