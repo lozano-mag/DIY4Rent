@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 
 export default function ListaMisHerramientas(props) {
 
@@ -24,6 +24,7 @@ export default function ListaMisHerramientas(props) {
 
     return (<div>
         {misherramientas.map((item) => {
+            
             return (<div className="herramientaLista">
                 <Link to={`/herramientas/${item.id}`}>
                     <img src={item.foto} height="100px" width='100px'></img>
@@ -32,6 +33,8 @@ export default function ListaMisHerramientas(props) {
                 <div className="botonesListaMisHerramientas">
                     <Link to={"/herramienta_edit/" + item.id}><button className="loginEnter">Editar</button></Link>
                     <button className="loginRegister" onClick={() => eliminarHerramienta(item.id)}>Eliminar</button>
+                    <Link to={`/alquilar/${item.id}`}><button className="loginEnter">Alquilar</button></Link>
+                    <Link to={`/devolver/${item.id}`}><button className="loginRegister">Confirmar Devolución</button></Link>
                 </div>
             </div>)
         })}

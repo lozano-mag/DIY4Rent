@@ -13,7 +13,6 @@ export default function Register() {
   const [archivo, setArchivo] = useState(null);
   const [imagenUrl, setImagenUrl] = useState(null);
   const [direccion, setDireccion] = useState("");
-  const [carga, setCarga] = useState(false);
   const [posicion, setPosition] = useState([1, 1]);
 
   const uploadImage = async (archivo) => {

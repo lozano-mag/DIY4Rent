@@ -24,7 +24,7 @@ export default function Valoracion(props) {
 
   const guardarPuntuacion = () => {
     const puntuar = {
-      userId: props.users[0].id,
+      userId: user.id,
       puntuacion: selectedStar,
     };
     fetch("/api/puntuaciones", {
@@ -51,8 +51,8 @@ export default function Valoracion(props) {
 
   return (
     <div>
-      <h2>Valorar a {props.users[0].nombre}</h2>
-      <img src={props.users[0].fotoUser} height="100px" width="100px"></img>
+      <h2>Valorar a {user.nombre}</h2>
+      <img src={user.fotoUser} height="100px" width="100px"></img>
       <p> Valore su experiencia:</p>
       {getStars()}
       <button onClick={guardarPuntuacion}>Valorar</button>

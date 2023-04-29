@@ -9,7 +9,6 @@ export default function Herramientas(props) {
     let { productId } = useParams();
 
     const [position, setPosition] = useState([1, 1]);
-    
     const [puntuacionMedia, setPuntuacionMedia] = useState(0);
     const [estrellas, setEstrellas] = useState("");
 
@@ -59,7 +58,7 @@ export default function Herramientas(props) {
             })
             puntuacionMedia = Math.floor(puntuacionTotal/nValoraciones);
             return puntuacionMedia;
-            
+
         }
         setPuntuacionMedia(puntuacionMediaUser());
     }, [propietario.id, props.puntuaciones]);
@@ -71,6 +70,7 @@ export default function Herramientas(props) {
         }
         setEstrellas(estrellasMedia());
     });
+
 
     return (
         <div id="cajaHerramienta">
@@ -101,6 +101,14 @@ export default function Herramientas(props) {
                 <p id="precio"><b>{herramienta.precio}€/dia</b></p>
                 <p>Ubicación:</p>
                 <Mapa posicion={position} propietario={propietario} />
+                <p>Lista de reservas:</p>
+                {props.reservas.map(reserva => {
+                    console.log(reserva);
+                    if(reserva.herramientaId == herramienta.id)
+                    return (<div>
+                        <p>{reserva.diaIni}/{reserva.mesIni}/{reserva.anoIni} - {reserva.diaFin}/{reserva.mesFin}/{reserva.anoFin}</p>
+                    </div>)
+                })}
             </div>
             <div id="listaRecomendados">
                 <div id="introRecomendados">

@@ -4,36 +4,38 @@ import ListaMisHerramientas from "./ListaMisHerramientas"
 import { useEffect, useState } from "react";
 
 export default function Dashboard(props) {
+
+    let herramientas = props.tools.filter(product => product.userId == 1);
+
     const [puntuacionMedia, setPuntuacionMedia] = useState(0);
     const [estrellas, setEstrellas] = useState("");
 
-    let herramientas = props.tools.filter(product => product.userId == 1);
-    
     useEffect(() => {
         const puntuacionMediaUser = () => {
             let puntuacionesFiltradasUserId = props.puntuaciones.filter(usuario => usuario.userId == props.users[0].id);
+            console.log(puntuacionesFiltradasUserId);
             let puntuacionTotal = 0;
             let nValoraciones = 0;
             let puntuacionMedia = 0;
             puntuacionesFiltradasUserId.map(puntuaciones => {
-                puntuacionTotal +=  puntuaciones.puntuacion;
+                puntuacionTotal += puntuaciones.puntuacion;
                 nValoraciones++;
             })
-            puntuacionMedia = Math.floor(puntuacionTotal/nValoraciones);
+            puntuacionMedia = Math.floor(puntuacionTotal / nValoraciones);
             return puntuacionMedia;
-            
+
         }
         setPuntuacionMedia(puntuacionMediaUser());
     }, [props.users[0].id, props.puntuaciones]);
 
-    useEffect(() =>{
+    useEffect(() => {
         const estrellasMedia = () => {
             const rutaEstrellas = `/${puntuacionMedia}estrellas.png`;
             return rutaEstrellas;
         }
         setEstrellas(estrellasMedia());
     });
-    
+
     return (<div id="dashboard">
         <div className="dashboardZona1">
             <img className="profilePhoto" src={props.users[0].fotoUser} width="250px" height="250px"></img>
@@ -49,7 +51,7 @@ export default function Dashboard(props) {
         </div>
         <div id="dashboardZona2">
             <p id="tituloDashboardZona2"><b>Herramientas alquiladas:</b></p>
-            <ListaAlquiladas users={props.users} tools={props.tools} />
+            <ListaAlquiladas tools={props.tools} reservas={props.reservas} usuarios={props.users} />
         </div>
         <div id="dashboardZona3">
             <p id="tituloDashboardZona3"><b>Mis herramientas:</b></p>
