@@ -3,6 +3,17 @@ import Lista from "./Lista"
 import { useState, useEffect } from "react";
 
 export default function UserPage(props) {
+  useEffect(
+    () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+
+          window.location.href = "/login";
+      }
+
+    }, []
+
+)
     let { userId } = useParams();
     let productosFiltrados = props.tools.filter(product => product.userId == userId);
 

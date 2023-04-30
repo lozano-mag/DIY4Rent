@@ -1,7 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import { useEffect } from "react";
 
 export default function EditUser(props) {
+  useEffect(
+    () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+
+          window.location.href = "/login";
+      }
+
+    }, []
+
+)
 
   let { userId } = useParams();
   let usuarioList = props.users.filter(user => user.id == userId);

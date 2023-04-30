@@ -5,6 +5,17 @@ import { useState, useEffect } from "react";
 import Mapa from "./Mapa";
 
 export default function Herramientas(props) {
+  useEffect(
+    () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+
+          window.location.href = "/login";
+      }
+
+    }, []
+
+)
 
     let { productId } = useParams();
 

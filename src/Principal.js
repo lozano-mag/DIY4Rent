@@ -3,6 +3,7 @@ import { useState } from "react";
 import Lista from "./Lista";
 
 export default function Principal(props) {
+ 
 
     const [herramientas, setProductos] = useState(props.tools);
     const [busqueda, setBusqueda] = useState("");

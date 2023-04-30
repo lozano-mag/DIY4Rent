@@ -1,7 +1,19 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function ListaAlquiladas(props) {
+  useEffect(
+    () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+
+          window.location.href = "/login";
+      }
+
+    }, []
+
+)
 
     let listaSinValorar = [];
 
@@ -54,7 +66,7 @@ export default function ListaAlquiladas(props) {
     let misHerramientasActuales = herramientasSinFiltro.filter(herramienta => idsHerramientasActuales.includes(herramienta.id));
     let misHerramientasActualesValoradas = herramientasSinFiltro.filter(herramienta => idsHerramientasActualesValoradas.includes(herramienta.id));
     let misHerramientasfuturas = herramientasSinFiltro.filter(herramienta => idsHerramientasFuturas.includes(herramienta.id));
-    
+
     let n = listaSinValorar.length - 1;
     console.log(n)
     const marcarValorado = (id) => {

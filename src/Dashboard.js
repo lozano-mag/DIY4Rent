@@ -5,6 +5,21 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard(props) {
 
+    //check logged in or not
+
+    useEffect(
+        () => {
+          const token = localStorage.getItem("token");
+          if (!token) {
+
+              window.location.href = "/login";
+          }
+
+        }, []
+
+    )
+
+
     let herramientas = props.tools.filter(product => product.userId == 1);
 
     const [puntuacionMedia, setPuntuacionMedia] = useState(0);

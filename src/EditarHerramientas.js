@@ -1,8 +1,20 @@
 import { useState } from "react";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function EditarHerramientas(props) {
+  useEffect(
+    () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+
+          window.location.href = "/login";
+      }
+
+    }, []
+
+)
 
   let { productId } = useParams();
 

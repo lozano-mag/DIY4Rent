@@ -1,7 +1,20 @@
 import { useState } from "react";
 import { Link} from "react-router-dom";
+import { useEffect } from "react";
+
 
 export default function ListaMisHerramientas(props) {
+  useEffect(
+    () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+
+          window.location.href = "/login";
+      }
+
+    }, []
+
+)
 
     const [herramientasSinFiltro, setHerramientas] = useState(props.tools);
 
@@ -24,7 +37,7 @@ export default function ListaMisHerramientas(props) {
 
     return (<div>
         {misherramientas.map((item) => {
-            
+
             return (<div className="herramientaLista">
                 <Link to={`/herramientas/${item.id}`}>
                     <img src={item.foto} height="100px" width='100px'></img>

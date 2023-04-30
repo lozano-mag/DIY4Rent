@@ -1,7 +1,18 @@
 import { Link } from "react-router-dom"
 import { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Register() {
+
+  // check if logged in
+
+  const token = localStorage.getItem("token");
+
+  if (token) {
+
+    window.location.href = "/dashboard";
+  }
+
 
   const [fotoUser, setFoto] = useState(null);
   const [nombre, setNombre] = useState("");
@@ -88,18 +99,17 @@ export default function Register() {
       alert('Las contraseñas no coinciden!')
     } else {
 
-      fetch("/api/usuarios", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(usuario)
-      })
-        .then(response => response.json())
-        .then(data => console.log(data))
-        .catch(error => console.error(error));
+      // use axios
+      axios.post('http://localhost:8080/api/usuarios', usuario)
+        .then(function (response) {
+          console.log(response);
+          alert("Usuario registrado correctamente");
 
-      window.location.href = '/login';
+        })
+        .catch(function (error) {
+          console.log(error);
+          alert("Error al registrar usuario");
+        });
     }
   };
 

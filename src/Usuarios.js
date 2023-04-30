@@ -1,5 +1,6 @@
 export default function Usuarios(props){
 
+
     const guardarUsuario = () => {
         const usuario = {
           nombre: "EJEMPLO",
@@ -8,7 +9,7 @@ export default function Usuarios(props){
           correoPaypal: "EJEMPLO@",
           direccion: "c/EJEMPLO"
         };
-       
+
         fetch("/api/usuarios", {
           method: "POST",
           headers: {

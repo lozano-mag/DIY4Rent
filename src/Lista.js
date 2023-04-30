@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom"
+import { useEffect } from "react"
 export default function Lista(props){
+ 
     return(<div id="listaHerramientas">
         {props.tools.map((item) => {
             return(

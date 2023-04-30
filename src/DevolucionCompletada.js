@@ -1,7 +1,19 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 
+import { useEffect } from "react";
 export default function DevolucionCompletada(props) {
+  useEffect(
+    () => {
+      const token = localStorage.getItem("token");
+      if (!token) {
+
+          window.location.href = "/login";
+      }
+
+    }, []
+
+)
 
     let { herramientaId } = useParams();
     let herramientas = props.tools.filter(tool => tool.id == herramientaId);
