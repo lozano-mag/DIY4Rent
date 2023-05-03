@@ -48,12 +48,12 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header users={usuarios}/>
       {carga ? <img id='loading' className='spinner' src='spinner.gif' /> :
         <Routes>
           <Route path={"/"} element={<Principal tools={herramientas} users={usuarios} reservas={reservas} />} />
           <Route path={"/herramientas/:productId"} element={<Herramientas users={usuarios} tools={herramientas} reservas={reservas} puntuaciones={puntuaciones} />} />
-          <Route path={"/login"} element={<Login />} />
+          <Route path={"/login"} element={<Login users={usuarios} />} />
           <Route path={"/register"} element={<Register />} />
           <Route path={'/usuarios'} element={<Usuarios users={usuarios} />} />
           <Route path={'/usuarios/:userId'} element={<UserPage users={usuarios} tools={herramientas} puntuaciones={puntuaciones} />} />

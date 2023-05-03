@@ -13,6 +13,7 @@ export default function SubirHerramienta() {
     }, []
 
 )
+const idLog = localStorage.getItem("idLog");
 
   const [nombre, setNombre] = useState("");
   const [categoria, setCategoria] = useState("");
@@ -52,7 +53,7 @@ export default function SubirHerramienta() {
       nombre: nombre,
       categoria: categoria,
       estadoDesgaste: estadoDesgaste,
-      userId: 1,
+      userId: idLog,
       precio: precio,
       descripcion: descripcion,
       foto: foto

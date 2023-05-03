@@ -6,28 +6,31 @@ import { useEffect, useState } from "react";
 export default function Dashboard(props) {
 
     //check logged in or not
-
+    const idLog = localStorage.getItem("idLog");
+    console.log(idLog);
     useEffect(
         () => {
-          const token = localStorage.getItem("token");
-          if (!token) {
+            const token = localStorage.getItem("token");
+            if (!token) {
 
-              window.location.href = "/login";
-          }
+                window.location.href = "/login";
+            }
 
         }, []
 
     )
 
+    let usuarioList = props.users.filter(user => user.id == idLog);
+    let usuario = usuarioList[0];
 
-    let herramientas = props.tools.filter(product => product.userId == 1);
-
+    let herramientas = props.tools.filter(product => product.userId == usuario.id);
+        console.log(usuario);
     const [puntuacionMedia, setPuntuacionMedia] = useState(0);
     const [estrellas, setEstrellas] = useState("");
 
     useEffect(() => {
         const puntuacionMediaUser = () => {
-            let puntuacionesFiltradasUserId = props.puntuaciones.filter(usuario => usuario.userId == props.users[0].id);
+            let puntuacionesFiltradasUserId = props.puntuaciones.filter(usuario => usuario.id == idLog);
             console.log(puntuacionesFiltradasUserId);
             let puntuacionTotal = 0;
             let nValoraciones = 0;
@@ -41,7 +44,7 @@ export default function Dashboard(props) {
 
         }
         setPuntuacionMedia(puntuacionMediaUser());
-    }, [props.users[0].id, props.puntuaciones]);
+    }, [usuario.id, props.puntuaciones]);
 
     useEffect(() => {
         const estrellasMedia = () => {
@@ -50,15 +53,15 @@ export default function Dashboard(props) {
         }
         setEstrellas(estrellasMedia());
     });
-
+    //
     return (<div id="dashboard">
         <div className="dashboardZona1">
-            <img className="profilePhoto" src={props.users[0].fotoUser} width="250px" height="250px"></img>
+            <img className="profilePhoto" src={usuario.fotoUser} width="250px" height="250px"></img>
             <div id="dashboardDatos">
-                <h2>{props.users[0].nombre}</h2>
+                <h2>{usuario.nombre}</h2>
                 <img src={estrellas}></img>
                 <p><b>Puntuación: {puntuacionMedia}</b></p>
-                <Link to={'/edituser/1'}><button className="loginEnter">Editar datos</button></Link>
+                <Link to={`/edituser/${idLog}`}><button className="loginEnter">Editar datos</button></Link>
             </div>
         </div>
         <div id="subirDashboard">
@@ -70,7 +73,8 @@ export default function Dashboard(props) {
         </div>
         <div id="dashboardZona3">
             <p id="tituloDashboardZona3"><b>Mis herramientas:</b></p>
-            <ListaMisHerramientas tools={herramientas} />
+            {console.log(props.tools)}
+            <ListaMisHerramientas tools={herramientas} reservas={props.reservas}/>
         </div>
     </div>)
 }

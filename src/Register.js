@@ -103,8 +103,7 @@ export default function Register() {
       axios.post('http://localhost:8080/api/usuarios', usuario)
         .then(function (response) {
           console.log(response);
-          alert("Usuario registrado correctamente");
-
+          window.location.href = "/login";
         })
         .catch(function (error) {
           console.log(error);

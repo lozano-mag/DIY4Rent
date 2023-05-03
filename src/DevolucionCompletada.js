@@ -3,17 +3,17 @@ import { useState } from "react";
 
 import { useEffect } from "react";
 export default function DevolucionCompletada(props) {
-  useEffect(
-    () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
+    useEffect(
+        () => {
+            const token = localStorage.getItem("token");
+            if (!token) {
 
-          window.location.href = "/login";
-      }
+                window.location.href = "/login";
+            }
 
-    }, []
+        }, []
 
-)
+    )
 
     let { herramientaId } = useParams();
     let herramientas = props.tools.filter(tool => tool.id == herramientaId);
@@ -57,17 +57,7 @@ export default function DevolucionCompletada(props) {
                 <li key={index} onClick={() => handleClick(reserva.id, index)}>
                     <ul style={style}>
                         <p>{correoAlquilado}</p>
-                        <p>{reserva.diaIni}</p>
-                        <p>/</p>
-                        <p>{reserva.mesIni}</p>
-                        <p>/</p>
-                        <p>{reserva.anoIni}</p>
-                        <p>-</p>
-                        <p>{reserva.diaFin}</p>
-                        <p>/</p>
-                        <p>{reserva.mesFin}</p>
-                        <p>/</p>
-                        <p>{reserva.anoFin}</p>
+                        <p>{`${reserva.diaIni}/${reserva.mesIni}/${reserva.anoIni} - ${reserva.diaFin}/${reserva.mesFin}/${reserva.anoFin}`}</p>
                     </ul>
                 </li>)
         })}

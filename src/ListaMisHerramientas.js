@@ -1,42 +1,35 @@
 import { useState } from "react";
-import { Link} from "react-router-dom";
-import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 
 export default function ListaMisHerramientas(props) {
-  useEffect(
-    () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
 
-          window.location.href = "/login";
-      }
-
-    }, []
-
-)
-
-    const [herramientasSinFiltro, setHerramientas] = useState(props.tools);
-
+    const [herramientas, setHerramientas] = useState(props.tools);
+    console.log(props.tools);
     const eliminarHerramienta = (id) => {
-        fetch(`/api/herramientas/${id}`, {
-            method: "DELETE",
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(data => console.log(data))
-            .catch(error => console.error(error));
-        let herramientasRestantes = herramientasSinFiltro.filter(product => product.id != id);
-        setHerramientas(herramientasRestantes);
+
+        let hayReservas = props.reservas.filter(reserva => reserva.herramientaId == id);
+        console.log(hayReservas)
+        if (hayReservas.length == 0) {
+            fetch(`/api/herramientas/${id}`, {
+                method: "DELETE",
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch(error => console.error(error));
+            let herramientasRestantes = herramientas.filter(product => product.id != id);
+            setHerramientas(herramientasRestantes);
+        } else {
+            alert("No se pueden borrar herramientas que tienes reservadas!");
+        }
     }
 
-    let misherramientas = herramientasSinFiltro.filter(product => product.userId == 1);
-
     return (<div>
-        {misherramientas.map((item) => {
+        {herramientas.map((item) => {
 
             return (<div className="herramientaLista">
                 <Link to={`/herramientas/${item.id}`}>

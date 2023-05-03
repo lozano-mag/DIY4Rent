@@ -11,6 +11,10 @@ export default function Principal(props) {
     const [distanciaBusqueda, setDistancia] = useState("");
     const [posicion, setPosicion] = useState([1, 1]);
 
+    const idLog = localStorage.getItem("idLog");
+    let usuarioList = props.users.filter(user => user.id == idLog);
+    let usuarioLog = usuarioList[0];
+
     const allCategories = props.tools.map(item => item.categoria);
     const finalCategorias = allCategories.reduce((todasCategorias, categoria) => {
         if (!todasCategorias.includes(categoria)) {
@@ -100,7 +104,7 @@ export default function Principal(props) {
     useEffect(() => {
         async function fetchData() {
             try {
-                setPosicion(await getCoordinates(props.users[0].direccion));
+                setPosicion(await getCoordinates(usuarioLog.direccion));
             } catch (error) {
                 console.log(error);
             }
