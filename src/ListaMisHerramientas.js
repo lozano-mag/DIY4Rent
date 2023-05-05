@@ -3,9 +3,8 @@ import { Link } from "react-router-dom";
 
 
 export default function ListaMisHerramientas(props) {
-
-    const [herramientas, setHerramientas] = useState(props.tools);
     console.log(props.tools);
+    const [herramientas, setHerramientas] = useState(props.tools);
     const eliminarHerramienta = (id) => {
 
         let hayReservas = props.reservas.filter(reserva => reserva.herramientaId == id);

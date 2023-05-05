@@ -16,6 +16,7 @@ import EditarHerramientas from './EditarHerramientas';
 import Alquilar from './Alquilar';
 import Valoracion from './Valoracion';
 import DevolucionCompletada from './DevolucionCompletada';
+import ConfirmarYPagar from './ConfirmarYPagar';
 
 function App() {
 
@@ -64,6 +65,7 @@ function App() {
           <Route path={'/alquilar/:herramientaId'} element={<Alquilar tools={herramientas} usuarios={usuarios} />} />
           <Route path={'/valoracion/:userId'} element={<Valoracion users={usuarios} puntuaciones={puntuaciones} />} />
           <Route path={'/devolver/:herramientaId'} element={<DevolucionCompletada users={usuarios} reservas={reservas} tools={herramientas} />} />
+          <Route path={'/confirmarypagar/:reservaId'} element={<ConfirmarYPagar users={usuarios} reservas={reservas} tools={herramientas}/>}/>
         </Routes>
       }
     </div>

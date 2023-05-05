@@ -5,23 +5,16 @@ import { useState, useEffect } from "react";
 import Mapa from "./Mapa";
 
 export default function Herramientas(props) {
-  useEffect(
-    () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
-
-          window.location.href = "/login";
-      }
-
-    }, []
-
-)
 
     let { productId } = useParams();
 
     const [position, setPosition] = useState([1, 1]);
     const [puntuacionMedia, setPuntuacionMedia] = useState(0);
     const [estrellas, setEstrellas] = useState("");
+
+    const idLog = localStorage.getItem("idLog");
+    let usuarioList = props.users.filter(user => user.id == idLog);
+    let usuarioLog = usuarioList[0];
 
     let herramientaList = props.tools.filter(product => product.id == productId);
     let herramienta = herramientaList[0];
@@ -31,6 +24,23 @@ export default function Herramientas(props) {
 
     let propietarios = props.users.filter(user => user.id === herramienta.userId);
     let propietario = propietarios[0];
+
+const calculaDistancia = () => {
+    let dLat = (propietario.lat - usuarioLog.lat) * (Math.PI / 180);
+    let dLon = (propietario.lon - usuarioLog.lon) * (Math.PI / 180);
+
+    const a =
+        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+        Math.cos(propietario.lat * (Math.PI / 180)) *
+        Math.cos(usuarioLog.lat * (Math.PI / 180)) *
+        Math.sin(dLon / 2) *
+        Math.sin(dLon / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+    
+    const dist = 6371 * c;
+
+    return dist;
+}
 
     useEffect(() => {
         async function getCoordinates(address) {
@@ -58,23 +68,28 @@ export default function Herramientas(props) {
 
     useEffect(() => {
         const puntuacionMediaUser = () => {
-            let puntuacionesFiltradasUserId = props.puntuaciones.filter(usuario => usuario.userId == propietario.id);
+            let puntuacionesFiltradasUserId = props.puntuaciones.filter(puntuacion => puntuacion.userId == propietario.id);
             console.log(puntuacionesFiltradasUserId);
             let puntuacionTotal = 0;
             let nValoraciones = 0;
             let puntuacionMedia = 0;
-            puntuacionesFiltradasUserId.map(puntuaciones => {
-                puntuacionTotal +=  puntuaciones.puntuacion;
-                nValoraciones++;
-            })
-            puntuacionMedia = Math.floor(puntuacionTotal/nValoraciones);
-            return puntuacionMedia;
-
+            if (puntuacionesFiltradasUserId.length == 0) {
+                puntuacionMedia = 0;
+                return puntuacionMedia;
+            } else {
+                puntuacionesFiltradasUserId.map(puntuaciones => {
+                    puntuacionTotal += puntuaciones.puntuacion;
+                    nValoraciones++;
+                })
+                puntuacionMedia = Math.floor(puntuacionTotal / nValoraciones);
+                console.log(puntuacionMedia);
+                return puntuacionMedia;
+            }
         }
         setPuntuacionMedia(puntuacionMediaUser());
     }, [propietario.id, props.puntuaciones]);
 
-    useEffect(() =>{
+    useEffect(() => {
         const estrellasMedia = () => {
             const rutaEstrellas = `/${puntuacionMedia}estrellas.png`;
             return rutaEstrellas;
@@ -85,7 +100,6 @@ export default function Herramientas(props) {
 
     return (
         <div id="cajaHerramienta">
-            {console.log(position)}
             <div id="zona1">
                 <img id="fotoHerramientaPrincipal" src={herramienta.foto} height="500px" width='600px'></img>
                 <Link to={"/usuarios/" + propietario.id}>
@@ -111,25 +125,24 @@ export default function Herramientas(props) {
                 <p>{herramienta.descripcion}</p>
                 <p id="precio"><b>{herramienta.precio}€/dia</b></p>
                 <p>Ubicación:</p>
+                {idLog ? <p>A <b>{calculaDistancia().toFixed(2)} Km</b> de ti</p> : <p>Inicia sesión para ver la distancia</p>}
                 <Mapa posicion={position} propietario={propietario} />
                 <p>Lista de reservas:</p>
                 {props.reservas.map(reserva => {
-                    console.log(reserva);
-                    if(reserva.herramientaId == herramienta.id)
-                    return (<div>
-                        <p>{reserva.diaIni}/{reserva.mesIni}/{reserva.anoIni} - {reserva.diaFin}/{reserva.mesFin}/{reserva.anoFin}</p>
-                    </div>)
+                    if (reserva.herramientaId == herramienta.id && reserva.isPagado == true)
+                        return (<div>
+                            <p>{reserva.diaIni}/{reserva.mesIni}/{reserva.anoIni} - {reserva.diaFin}/{reserva.mesFin}/{reserva.anoFin}</p>
+                        </div>)
                 })}
             </div>
             <div id="listaRecomendados">
                 <div id="introRecomendados">
-                    <p><b>Otras herramientas recomendadas:</b></p>
+                    <p><b>Otras herramientas de la misma categoría:</b></p>
                 </div>
                 <div id="tarjetasRecomendados">
                     <Lista tools={listarecomendados} />
                 </div>
             </div>
-
         </div>
     )
 }

@@ -4,26 +4,22 @@ import axios from 'axios';
 
 
 export default function Login(props) {
-
-    // check if logged in or not
+    
     const token = localStorage.getItem("token");
 
     if (token) {
 
-        //window.location.href = "/dashboard";
+        window.location.href = "/dashboard";
         console.log(token);
     }
 
 
-    // use state for correo and pass
     const [correo, setCorreo] = useState("");
 
     const [password, setPassword] = useState("");
 
     const LoginMethod = (correo, password) => {
 
-        let usuarioLogeado;
-        // use axios to call backend api
         axios.post('http://localhost:8080/login', {
             correo: correo,
             password: password

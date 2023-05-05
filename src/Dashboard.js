@@ -5,9 +5,7 @@ import { useEffect, useState } from "react";
 
 export default function Dashboard(props) {
 
-    //check logged in or not
     const idLog = localStorage.getItem("idLog");
-    console.log(idLog);
     useEffect(
         () => {
             const token = localStorage.getItem("token");
@@ -24,27 +22,32 @@ export default function Dashboard(props) {
     let usuario = usuarioList[0];
 
     let herramientas = props.tools.filter(product => product.userId == usuario.id);
-        console.log(usuario);
     const [puntuacionMedia, setPuntuacionMedia] = useState(0);
-    const [estrellas, setEstrellas] = useState("");
+    const [estrellas, setEstrellas] = useState("/0estrellas.png");
 
     useEffect(() => {
         const puntuacionMediaUser = () => {
-            let puntuacionesFiltradasUserId = props.puntuaciones.filter(usuario => usuario.id == idLog);
-            console.log(puntuacionesFiltradasUserId);
+            let puntuacionesFiltradasUserId = props.puntuaciones.filter(puntuacion => puntuacion.userId == idLog);
             let puntuacionTotal = 0;
             let nValoraciones = 0;
             let puntuacionMedia = 0;
-            puntuacionesFiltradasUserId.map(puntuaciones => {
-                puntuacionTotal += puntuaciones.puntuacion;
-                nValoraciones++;
-            })
-            puntuacionMedia = Math.floor(puntuacionTotal / nValoraciones);
-            return puntuacionMedia;
-
+            if (puntuacionesFiltradasUserId.length == 0){
+                puntuacionMedia = 0;
+                return puntuacionMedia;
+            }else{
+                puntuacionesFiltradasUserId.map(puntuaciones => {
+                    puntuacionTotal += puntuaciones.puntuacion;
+                    nValoraciones++;
+                })
+                puntuacionMedia = Math.floor(puntuacionTotal / nValoraciones);
+                return puntuacionMedia;
+            }
         }
+
         setPuntuacionMedia(puntuacionMediaUser());
     }, [usuario.id, props.puntuaciones]);
+
+    
 
     useEffect(() => {
         const estrellasMedia = () => {
@@ -53,7 +56,7 @@ export default function Dashboard(props) {
         }
         setEstrellas(estrellasMedia());
     });
-    //
+    
     return (<div id="dashboard">
         <div className="dashboardZona1">
             <img className="profilePhoto" src={usuario.fotoUser} width="250px" height="250px"></img>
@@ -73,7 +76,6 @@ export default function Dashboard(props) {
         </div>
         <div id="dashboardZona3">
             <p id="tituloDashboardZona3"><b>Mis herramientas:</b></p>
-            {console.log(props.tools)}
             <ListaMisHerramientas tools={herramientas} reservas={props.reservas}/>
         </div>
     </div>)

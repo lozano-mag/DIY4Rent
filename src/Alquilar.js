@@ -17,7 +17,17 @@ export default function Alquilar(props) {
     let herramienta = herramientas[0];
 
     const guardarReserva = () => {
+        if (!correoUsuarioReservado){
+            return(
+                alert("")
+            )
+        }
         let usuarioReservado = props.usuarios.filter(usuario => usuario.correo == correoUsuarioReservado);
+        if (usuarioReservado.length == 0){
+            return(
+                alert("Escribe un correo válido")
+            )
+        }
         let idUsuarioReservado = usuarioReservado[0].id;
 
         const reserva = {

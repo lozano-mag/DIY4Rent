@@ -7,16 +7,16 @@ export default function SubirHerramienta() {
       const token = localStorage.getItem("token");
       if (!token) {
 
-          window.location.href = "/login";
+        window.location.href = "/login";
       }
 
     }, []
 
-)
-const idLog = localStorage.getItem("idLog");
+  )
+  const idLog = localStorage.getItem("idLog");
 
   const [nombre, setNombre] = useState("");
-  const [categoria, setCategoria] = useState("");
+  const [categoria, setCategoria] = useState("Sierra");
   const [estadoDesgaste, setEstadoDesgaste] = useState(1);
   const [precio, setPrecio] = useState();
   const [descripcion, setDescripcion] = useState("");
@@ -82,7 +82,21 @@ const idLog = localStorage.getItem("idLog");
     <div className="formularioLogin">
       <div className="inputsforms">
         <input placeholder="Nombre de la herramienta" onChange={e => setNombre(e.target.value)}></input>
-        <input placeholder="Categoría de la herramienta" onChange={e => setCategoria(e.target.value)}></input>
+        <div className="SelectorEditar">
+          <label>Categoría:</label>
+          <select onChange={e => setCategoria(e.target.value)}>
+            <option>Sierra</option>
+            <option>Pelacables</option>
+            <option>Taladro</option>
+            <option>Silicona</option>
+            <option>Engalletadora</option>
+            <option>Medición</option>
+            <option>Corte</option>
+            <option>Sujección</option>
+            <option>Seguridad</option>
+            <option>Acabados</option>
+          </select>
+        </div>
         <div className="SelectorEditar">
           <label>Estado de desgaste:</label>
           <select onChange={e => setEstadoDesgaste(e.target.value)}>

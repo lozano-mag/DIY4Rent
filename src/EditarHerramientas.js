@@ -16,6 +16,8 @@ export default function EditarHerramientas(props) {
 
 )
 
+const idLog = localStorage.getItem("idLog");
+
   let { productId } = useParams();
 
   let herramientas = props.tools.filter(product => product.id == productId);
@@ -60,7 +62,7 @@ export default function EditarHerramientas(props) {
       nombre: nombre,
       categoria: categoria,
       estadoDesgaste: estadoDesgaste,
-      userId: 1,
+      userId: idLog,
       precio: precio,
       descripcion: descripcion,
       foto: foto
@@ -86,9 +88,20 @@ export default function EditarHerramientas(props) {
           <label>Nombre:</label>
           <input placeholder={herramienta.nombre} onChange={e => setNombre(e.target.value)}></input>
         </div>
-        <div className="inputEditar">
+        <div className="SelectorEditar">
           <label>Categoría:</label>
-          <input placeholder={herramienta.categoria} onChange={e => setCategoria(e.target.value)}></input>
+          <select onChange={e => setCategoria(e.target.value)}>
+            <option>Sierra</option>
+            <option>Pelacables</option>
+            <option>Taladro</option>
+            <option>Silicona</option>
+            <option>Engalletadora</option>
+            <option>Medición</option>
+            <option>Corte</option>
+            <option>Sujección</option>
+            <option>Seguridad</option>
+            <option>Acabados</option>
+          </select>
         </div>
         <div className="SelectorEditar">
           <label>Estado de desgaste:</label>

@@ -3,20 +3,8 @@ import { Link } from "react-router-dom";
 import { useEffect } from "react";
 
 export default function ListaAlquiladas(props) {
-    useEffect(
-        () => {
-            const token = localStorage.getItem("token");
-            if (!token) {
 
-                window.location.href = "/login";
-            }
-
-        }, []
-
-    )
     const idLog = localStorage.getItem("idLog");
-
-    let listaSinValorar = [];
 
     let herramientasSinFiltro = props.tools;
     let reservasSinFiltro = props.reservas;
@@ -30,8 +18,10 @@ export default function ListaAlquiladas(props) {
 
     let misReservas = reservasSinFiltro.filter(reserva => reserva.usuarioReservado == idLog);
 
+    let misReservasPorPagar = misReservas.filter(reserva => reserva.isPagado == false);
+
     let misReservasActuales = misReservas.filter(reserva => {
-        if (reserva.isValorado == false) {
+        if (reserva.isPagado == true && reserva.isValorado == false) {
             if (anoActual > reserva.anoIni) {
                 return reserva;
             } else if (anoActual == reserva.anoIni && mesActual > reserva.mesIni) {
@@ -43,7 +33,7 @@ export default function ListaAlquiladas(props) {
     });
 
     let misReservasActualesValoradas = misReservas.filter(reserva => {
-        if (reserva.isValorado == true) {
+        if (reserva.isPagado == true && reserva.isValorado == true) {
             if (anoActual > reserva.anoIni) {
                 return reserva;
             } else if (anoActual == reserva.anoIni && mesActual > reserva.mesIni) {
@@ -55,12 +45,14 @@ export default function ListaAlquiladas(props) {
     });
 
     let misReservasFuturas = misReservas.filter(reserva => {
-        if (anoActual < reserva.anoIni) {
-            return reserva;
-        } else if (anoActual == reserva.anoIni && mesActual < reserva.mesIni) {
-            return reserva;
-        } else if (anoActual == reserva.anoIni && mesActual == reserva.mesIni && diaActual < reserva.diaIni) {
-            return reserva;
+        if (reserva.isPagado == true) {
+            if (anoActual < reserva.anoIni) {
+                return reserva;
+            } else if (anoActual == reserva.anoIni && mesActual < reserva.mesIni) {
+                return reserva;
+            } else if (anoActual == reserva.anoIni && mesActual == reserva.mesIni && diaActual < reserva.diaIni) {
+                return reserva;
+            }
         }
     });
 
@@ -69,7 +61,7 @@ export default function ListaAlquiladas(props) {
         const reserva = {
             isValorado: true
         }
-        fetch(`/api/reservas/${id}`, {
+        fetch(`/api/valorarreservas/${id}`, {
             method: "PUT",
             headers: {
                 "Content-Type": "application/json"
@@ -82,6 +74,19 @@ export default function ListaAlquiladas(props) {
     }
 
     return (<div>
+        <p><b>Por confirmar y pagar</b></p>
+        {misReservasPorPagar.map((item => {
+            let herramientaList = herramientasSinFiltro.filter(herramienta => herramienta.id == item.herramientaId);
+            let herramienta = herramientaList[0];
+            let propietario = usuarios.filter(usuario => usuario.id == herramienta.userId);
+            return (<div>
+                <p>{herramienta.nombre}</p>
+                <p>de {propietario[0].nombre}</p>
+                <p>Fecha de alquiler: {item.diaIni}/{item.mesIni}/{item.anoIni} - {item.diaFin}/{item.mesFin}/{item.anoFin}</p>
+                <Link to={`/confirmarypagar/${item.id}`}><button>Confirmar y pagar</button></Link>
+            </div>)
+
+        }))}
         <p><b>Actualmente en préstamo</b></p>
         {misReservasActuales.map((item) => {
             let herramientaList = herramientasSinFiltro.filter(herramienta => herramienta.id == item.herramientaId);

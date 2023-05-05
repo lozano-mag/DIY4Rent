@@ -1,15 +1,22 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Lista from "./Lista";
+import moment from "moment/moment";
 
 export default function Principal(props) {
- 
+
 
     const [herramientas, setProductos] = useState(props.tools);
     const [busqueda, setBusqueda] = useState("");
     const [precioBusqueda, setPrecio] = useState("");
     const [distanciaBusqueda, setDistancia] = useState("");
     const [posicion, setPosicion] = useState([1, 1]);
+    const [diaIniSeleccionado, setdiaIniSeleccionado] = useState(1);
+    const [mesIniSeleccionado, setmesIniSeleccionado] = useState(1);
+    const [anoIniSeleccionado, setanoIniSeleccionado] = useState(2023);
+    const [diaFinSeleccionado, setdiaFinSeleccionado] = useState(1);
+    const [mesFinSeleccionado, setmesFinSeleccionado] = useState(1);
+    const [anoFinSeleccionado, setanoFinSeleccionado] = useState(2023);
 
     const idLog = localStorage.getItem("idLog");
     let usuarioList = props.users.filter(user => user.id == idLog);
@@ -58,7 +65,6 @@ export default function Principal(props) {
     }
 
     function filtrarDistancia() {
-        console.log(posicion);
         let distancias = props.users.map(user => {
             let dLat = (user.lat - posicion.lat) * (Math.PI / 180);
             let dLon = (user.lon - posicion.lon) * (Math.PI / 180);
@@ -113,9 +119,168 @@ export default function Principal(props) {
         console.log(posicion);
     }, [props.users[0].direccion]);
 
+    const buscarReservasDisponibles = () => {
+        let stringFechaIni = `${anoIniSeleccionado}-${mesIniSeleccionado}-${diaIniSeleccionado}`;
+        let stringFechaFin = `${anoFinSeleccionado}-${mesFinSeleccionado}-${diaFinSeleccionado}`;
+        console.log(stringFechaIni);
+        console.log(stringFechaFin);
+
+        const fechaSeleccionadaIniObjeto = moment(stringFechaIni);
+        const fechaSeleccionadaFinObjeto = moment(stringFechaFin);
+
+        let idsEliminados = [];
+
+        const reservasDisponibles = props.reservas.filter((reserva) => {
+            const stringFechaInicio = `${reserva.anoIni}-${reserva.mesIni}-${reserva.diaIni}`;
+            const stringFechaFin = `${reserva.anoFin}-${reserva.mesFin}-${reserva.diaFin}`;
+            const fechaInicioObjeto = moment(stringFechaInicio);
+            const fechaFinObjeto = moment(stringFechaFin);
+            if (fechaSeleccionadaIniObjeto.isSameOrAfter(fechaInicioObjeto) &&
+                fechaSeleccionadaIniObjeto.isBefore(fechaFinObjeto) &&
+                fechaSeleccionadaFinObjeto.isAfter(fechaInicioObjeto)) {
+                idsEliminados.push(reserva.herramientaId);
+                console.log("eliminado")
+            }
+
+            return (
+                (fechaSeleccionadaIniObjeto.isBefore(fechaInicioObjeto) && fechaSeleccionadaFinObjeto.isBefore(fechaInicioObjeto))
+                ||
+                (fechaFinObjeto.isBefore(fechaSeleccionadaIniObjeto) && fechaFinObjeto.isBefore(fechaSeleccionadaFinObjeto))
+            );
+        });
+
+        console.log(idsEliminados);
+        console.log(props.reservas);
+        console.log(reservasDisponibles);
+        let idsFiltradosConReserva = reservasDisponibles.map(reserva => reserva.herramientaId);
+        let listaHerramientasDisponibles = props.tools.filter(herramienta => idsFiltradosConReserva.includes(herramienta.id));
+        let allIds = props.reservas.map(reserva => reserva.herramientaId);
+        let listaHerramientasSinReserva = props.tools.filter(herramienta => !allIds.includes(herramienta.id));
+        let listadoDisponibles = [...listaHerramientasDisponibles, ...listaHerramientasSinReserva];
+        let listadoDisponiblesFinal = listadoDisponibles.filter(herramienta => !idsEliminados.includes(herramienta.id));
+
+        setProductos(listadoDisponiblesFinal);
+    };
+
     return (
         <div id="pagBusqueda">
             <div id="barraBusqueda">
+                <div>
+                    <p>Filtrar por disponibilidad:</p>
+                    <div>
+                        <p>Inicio</p>
+                        <select onChange={e => setdiaIniSeleccionado(e.target.value)}>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                            <option>25</option>
+                            <option>27</option>
+                            <option>28</option>
+                            <option>29</option>
+                            <option>30</option>
+                            <option>31</option>
+                        </select>
+                        <p>/</p>
+                        <select onChange={e => setmesIniSeleccionado(e.target.value)}>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                        <p>/</p>
+                        <select onChange={e => setanoIniSeleccionado(e.target.value)}>
+                            <option>2023</option>
+                            <option>2024</option>
+                            <option>2025</option>
+                        </select>
+                    </div>
+                    <div>
+                        <p>Final</p>
+                        <select onChange={e => setdiaFinSeleccionado(e.target.value)}>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            <option>21</option>
+                            <option>22</option>
+                            <option>23</option>
+                            <option>24</option>
+                            <option>25</option>
+                            <option>27</option>
+                            <option>28</option>
+                            <option>29</option>
+                            <option>30</option>
+                            <option>31</option>
+                        </select>
+                        <p>/</p>
+                        <select onChange={e => setmesFinSeleccionado(e.target.value)}>
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                        </select>
+                        <p>/</p>
+                        <select onChange={e => setanoFinSeleccionado(e.target.value)}>
+                            <option>2023</option>
+                            <option>2024</option>
+                            <option>2025</option>
+                        </select>
+                    </div>
+                    <button onClick={() => buscarReservasDisponibles()}>Filtrar</button>
+                </div>
                 <input id="filtroPrecio" placeholder="Max Precio (€/día)" onChange={e => setPrecio(e.target.value)}></input>
                 <button id="botonFiltroPrecio" onClick={() => filtroPrecio()}>Filtrar</button>
                 <input placeholder="Max Distancia" onChange={e => setDistancia(e.target.value)}></input>

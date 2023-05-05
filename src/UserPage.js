@@ -3,17 +3,17 @@ import Lista from "./Lista"
 import { useState, useEffect } from "react";
 
 export default function UserPage(props) {
-  useEffect(
-    () => {
-      const token = localStorage.getItem("token");
-      if (!token) {
+    useEffect(
+        () => {
+            const token = localStorage.getItem("token");
+            if (!token) {
 
-          window.location.href = "/login";
-      }
+                window.location.href = "/login";
+            }
 
-    }, []
+        }, []
 
-)
+    )
     let { userId } = useParams();
     let productosFiltrados = props.tools.filter(product => product.userId == userId);
 
@@ -25,17 +25,22 @@ export default function UserPage(props) {
 
     useEffect(() => {
         const puntuacionMediaUser = () => {
-            let puntuacionesFiltradasUserId = props.puntuaciones.filter(usuario => usuario.userId == user.id);
+            let puntuacionesFiltradasUserId = props.puntuaciones.filter(puntuacion => puntuacion.userId == user.id);
             console.log(puntuacionesFiltradasUserId);
             let puntuacionTotal = 0;
             let nValoraciones = 0;
             let puntuacionMedia = 0;
-            puntuacionesFiltradasUserId.map(puntuaciones => {
-                puntuacionTotal += puntuaciones.puntuacion;
-                nValoraciones++;
-            })
-            puntuacionMedia = Math.floor(puntuacionTotal / nValoraciones);
-            return puntuacionMedia;
+            if (puntuacionesFiltradasUserId.length == 0) {
+                puntuacionMedia = 0;
+                return puntuacionMedia;
+            } else {
+                puntuacionesFiltradasUserId.map(puntuaciones => {
+                    puntuacionTotal += puntuaciones.puntuacion;
+                    nValoraciones++;
+                })
+                puntuacionMedia = Math.floor(puntuacionTotal / nValoraciones);
+                return puntuacionMedia;
+            }
 
         }
         setPuntuacionMedia(puntuacionMediaUser());
