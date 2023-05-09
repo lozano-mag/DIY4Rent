@@ -24,6 +24,7 @@ export default function Dashboard(props) {
     let herramientas = props.tools.filter(product => product.userId == usuario.id);
     const [puntuacionMedia, setPuntuacionMedia] = useState(0);
     const [estrellas, setEstrellas] = useState("/0estrellas.png");
+    const [numeroValoraciones, setNumeroValoraciones] = useState(0);
 
     useEffect(() => {
         const puntuacionMediaUser = () => {
@@ -31,10 +32,10 @@ export default function Dashboard(props) {
             let puntuacionTotal = 0;
             let nValoraciones = 0;
             let puntuacionMedia = 0;
-            if (puntuacionesFiltradasUserId.length == 0){
+            if (puntuacionesFiltradasUserId.length == 0) {
                 puntuacionMedia = 0;
                 return puntuacionMedia;
-            }else{
+            } else {
                 puntuacionesFiltradasUserId.map(puntuaciones => {
                     puntuacionTotal += puntuaciones.puntuacion;
                     nValoraciones++;
@@ -43,11 +44,12 @@ export default function Dashboard(props) {
                 return puntuacionMedia;
             }
         }
-
+        let puntuacionesFiltradasUserId = props.puntuaciones.filter(puntuacion => puntuacion.userId == usuario.id);
+        setNumeroValoraciones(puntuacionesFiltradasUserId.length);
         setPuntuacionMedia(puntuacionMediaUser());
     }, [usuario.id, props.puntuaciones]);
 
-    
+
 
     useEffect(() => {
         const estrellasMedia = () => {
@@ -56,14 +58,14 @@ export default function Dashboard(props) {
         }
         setEstrellas(estrellasMedia());
     });
-    
+
     return (<div id="dashboard">
         <div className="dashboardZona1">
             <img className="profilePhoto" src={usuario.fotoUser} width="250px" height="250px"></img>
             <div id="dashboardDatos">
                 <h2>{usuario.nombre}</h2>
                 <img src={estrellas}></img>
-                <p><b>Puntuación: {puntuacionMedia}</b></p>
+                <p><b>Número de valoraciones: {numeroValoraciones}</b></p>
                 <Link to={`/edituser/${idLog}`}><button className="loginEnter">Editar datos</button></Link>
             </div>
         </div>
@@ -76,7 +78,7 @@ export default function Dashboard(props) {
         </div>
         <div id="dashboardZona3">
             <p id="tituloDashboardZona3"><b>Mis herramientas:</b></p>
-            <ListaMisHerramientas tools={herramientas} reservas={props.reservas}/>
+            <ListaMisHerramientas tools={herramientas} reservas={props.reservas} />
         </div>
     </div>)
 }

@@ -122,8 +122,6 @@ export default function Principal(props) {
     const buscarReservasDisponibles = () => {
         let stringFechaIni = `${anoIniSeleccionado}-${mesIniSeleccionado}-${diaIniSeleccionado}`;
         let stringFechaFin = `${anoFinSeleccionado}-${mesFinSeleccionado}-${diaFinSeleccionado}`;
-        console.log(stringFechaIni);
-        console.log(stringFechaFin);
 
         const fechaSeleccionadaIniObjeto = moment(stringFechaIni);
         const fechaSeleccionadaFinObjeto = moment(stringFechaFin);
@@ -165,11 +163,11 @@ export default function Principal(props) {
     return (
         <div id="pagBusqueda">
             <div id="barraBusqueda">
-                <div>
-                    <p>Filtrar por disponibilidad:</p>
-                    <div>
-                        <p>Inicio</p>
-                        <select onChange={e => setdiaIniSeleccionado(e.target.value)}>
+            <p>Filtrar por:</p>
+                <div class="DesdeyHasta">
+                    <p><b>Disponibilidad</b> <i>desde</i></p>
+                    <div class="Desde">
+                        <select className="botonDisponibilidadFecha" onChange={e => setdiaIniSeleccionado(e.target.value)}>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -201,8 +199,8 @@ export default function Principal(props) {
                             <option>30</option>
                             <option>31</option>
                         </select>
-                        <p>/</p>
-                        <select onChange={e => setmesIniSeleccionado(e.target.value)}>
+        
+                        <select className="botonDisponibilidadFecha" onChange={e => setmesIniSeleccionado(e.target.value)}>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -216,16 +214,16 @@ export default function Principal(props) {
                             <option>11</option>
                             <option>12</option>
                         </select>
-                        <p>/</p>
-                        <select onChange={e => setanoIniSeleccionado(e.target.value)}>
+                
+                        <select className="botonDisponibilidadFecha" onChange={e => setanoIniSeleccionado(e.target.value)}>
                             <option>2023</option>
                             <option>2024</option>
                             <option>2025</option>
                         </select>
                     </div>
-                    <div>
-                        <p>Final</p>
-                        <select onChange={e => setdiaFinSeleccionado(e.target.value)}>
+                    <div class="Hasta">
+                        <p><i>hasta</i></p>
+                        <select className="botonDisponibilidadFecha" onChange={e => setdiaFinSeleccionado(e.target.value)}>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -257,8 +255,8 @@ export default function Principal(props) {
                             <option>30</option>
                             <option>31</option>
                         </select>
-                        <p>/</p>
-                        <select onChange={e => setmesFinSeleccionado(e.target.value)}>
+                    
+                        <select className="botonDisponibilidadFecha" onChange={e => setmesFinSeleccionado(e.target.value)}>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -272,19 +270,19 @@ export default function Principal(props) {
                             <option>11</option>
                             <option>12</option>
                         </select>
-                        <p>/</p>
-                        <select onChange={e => setanoFinSeleccionado(e.target.value)}>
+                        
+                        <select className="botonDisponibilidadFecha" onChange={e => setanoFinSeleccionado(e.target.value)}>
                             <option>2023</option>
                             <option>2024</option>
                             <option>2025</option>
                         </select>
                     </div>
-                    <button onClick={() => buscarReservasDisponibles()}>Filtrar</button>
+                    <button id="BotonFiltrarDisponibilidad" onClick={() => buscarReservasDisponibles()}>Filtrar</button>
                 </div>
-                <input id="filtroPrecio" placeholder="Max Precio (€/día)" onChange={e => setPrecio(e.target.value)}></input>
-                <button id="botonFiltroPrecio" onClick={() => filtroPrecio()}>Filtrar</button>
-                <input placeholder="Max Distancia" onChange={e => setDistancia(e.target.value)}></input>
-                <button onClick={() => filtrarDistancia()}>Filtrar</button>
+                <input className="filtroPrecio" placeholder="Max Precio (€/día)" onChange={e => setPrecio(e.target.value)}></input>
+                <button className="botonFiltroPrecio" onClick={() => filtroPrecio()}>Filtrar</button>
+                <input className="filtroPrecio" placeholder="Max Distancia (Km)" onChange={e => setDistancia(e.target.value)}></input>
+                <button className="botonFiltroPrecio" onClick={() => filtrarDistancia()}>Filtrar</button>
                 <select id="selectorCategorias" onChange={e => filtroCategoria(e.target.value)}>
                     <option key={0}>Todas</option>
                     {finalCategorias.map((item, index) => {

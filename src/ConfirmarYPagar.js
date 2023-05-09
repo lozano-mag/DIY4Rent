@@ -56,8 +56,8 @@ export default function ConfirmarYPagar(props) {
         <h2>Confirmar reserva de: {herramienta.nombre}</h2>
         <img src={herramienta.foto} height="200px" width="200px"></img>
         <p>Periodo de alquiler: <b>{reserva.diaIni}/{reserva.mesIni}/{reserva.anoIni} - {reserva.diaFin}/{reserva.mesFin}/{reserva.anoFin}</b></p>
-        <p>Total a pagar: <b>{precio}€</b> ({herramienta.precio}€/día durante {diasEntreFechas} días)</p>
-        <button onClick={() => marcarPagado(reserva.id)}>Pagar</button>
-        <button onClick={() => eliminarReserva(reserva.id)}>Eliminar</button>
+        <p>Total a pagar: <b>{precio.toFixed(2)}€</b> ({herramienta.precio}€/día durante {diasEntreFechas} días)</p>
+        <button id="botonPagar"onClick={() => marcarPagado(reserva.id)}>Pagar</button>
+        <button id="botonEliminar" onClick={() => eliminarReserva(reserva.id)}>Eliminar</button>
     </div>)
 }

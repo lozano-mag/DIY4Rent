@@ -68,7 +68,8 @@ export default function Valoracion(props) {
       <img src={user.fotoUser} height="100px" width="100px"></img>
       <p> Valore su experiencia:</p>
       {getStars()}
-      <button onClick={guardarPuntuacion}>Valorar</button>
+      <br/>
+      <button id="botonValorar" onClick={guardarPuntuacion}>Valorar</button>
     </div>
   );
 }

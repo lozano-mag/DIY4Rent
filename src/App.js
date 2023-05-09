@@ -62,7 +62,7 @@ function App() {
           <Route path={'/dashboard'} element={<Dashboard users={usuarios} tools={herramientas} reservas={reservas} puntuaciones={puntuaciones} />} />
           <Route path={'/herramienta_upload'} element={<SubirHerramienta />} />
           <Route path={'/herramienta_edit/:productId'} element={<EditarHerramientas tools={herramientas} />} />
-          <Route path={'/alquilar/:herramientaId'} element={<Alquilar tools={herramientas} usuarios={usuarios} />} />
+          <Route path={'/alquilar/:herramientaId'} element={<Alquilar tools={herramientas} usuarios={usuarios} reservas={reservas}/>} />
           <Route path={'/valoracion/:userId'} element={<Valoracion users={usuarios} puntuaciones={puntuaciones} />} />
           <Route path={'/devolver/:herramientaId'} element={<DevolucionCompletada users={usuarios} reservas={reservas} tools={herramientas} />} />
           <Route path={'/confirmarypagar/:reservaId'} element={<ConfirmarYPagar users={usuarios} reservas={reservas} tools={herramientas}/>}/>

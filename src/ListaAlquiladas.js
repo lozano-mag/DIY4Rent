@@ -79,11 +79,11 @@ export default function ListaAlquiladas(props) {
             let herramientaList = herramientasSinFiltro.filter(herramienta => herramienta.id == item.herramientaId);
             let herramienta = herramientaList[0];
             let propietario = usuarios.filter(usuario => usuario.id == herramienta.userId);
-            return (<div>
+            return (<div className="alquiladaEnPrestamo">
                 <p>{herramienta.nombre}</p>
                 <p>de {propietario[0].nombre}</p>
                 <p>Fecha de alquiler: {item.diaIni}/{item.mesIni}/{item.anoIni} - {item.diaFin}/{item.mesFin}/{item.anoFin}</p>
-                <Link to={`/confirmarypagar/${item.id}`}><button>Confirmar y pagar</button></Link>
+                <Link to={`/confirmarypagar/${item.id}`}><button id="alquiladaEnPrestamoBoton">Confirmar y pagar</button></Link>
             </div>)
 
         }))}
@@ -93,7 +93,7 @@ export default function ListaAlquiladas(props) {
             let herramienta = herramientaList[0];
             let propietario = usuarios.filter(usuario => usuario.id == herramienta.userId);
             let idValorar = item.id;
-            return (<div>
+            return (<div className="alquiladaEnPrestamo">
                 <p>{herramienta.nombre}</p>
                 <p>de {propietario[0].nombre}</p>
                 <Link onClick={() => marcarValorado(idValorar)} to={`/valoracion/${propietario[0].id}`}><button>Valorar</button></Link>
@@ -104,7 +104,7 @@ export default function ListaAlquiladas(props) {
             let herramientaList = herramientasSinFiltro.filter(herramienta => herramienta.id == item.herramientaId);
             let herramienta = herramientaList[0];
             let propietario = usuarios.filter(usuario => usuario.id == herramienta.userId);
-            return (<div>
+            return (<div className="alquiladaEnPrestamo">
                 <p>{herramienta.nombre}</p>
                 <p>de {propietario[0].nombre}</p>
             </div>
@@ -115,7 +115,7 @@ export default function ListaAlquiladas(props) {
             let herramientaList = herramientasSinFiltro.filter(herramienta => herramienta.id == item.herramientaId);
             let herramienta = herramientaList[0];
             let propietario = usuarios.filter(usuario => usuario.id == herramienta.userId);
-            return (<div>
+            return (<div className="alquiladaEnPrestamo">
                 <p>{herramienta.nombre}</p>
                 <p>de {propietario[0].nombre}</p>
             </div>)

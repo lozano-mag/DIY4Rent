@@ -54,13 +54,13 @@ export default function DevolucionCompletada(props) {
             let correoAlquilado = alquiladoList[0].correo;
             const style = index === reservaActiva ? { border: '2px solid red' } : {};
             return (
-                <li key={index} onClick={() => handleClick(reserva.id, index)}>
-                    <ul style={style}>
-                        <p>{correoAlquilado}</p>
-                        <p>{`${reserva.diaIni}/${reserva.mesIni}/${reserva.anoIni} - ${reserva.diaFin}/${reserva.mesFin}/${reserva.anoFin}`}</p>
-                    </ul>
-                </li>)
+                <ul key={index} onClick={() => handleClick(reserva.id, index)}>
+                    <ol style={style}>
+                        <p>Correo del usuario: {correoAlquilado}</p>
+                        <p>Periodo de la reserva: {`${reserva.diaIni}/${reserva.mesIni}/${reserva.anoIni} - ${reserva.diaFin}/${reserva.mesFin}/${reserva.anoFin}`}</p>
+                    </ol>
+                </ul>)
         })}
-        <button onClick={() => eliminarReserva(reservaSeleccionada)}>Confirmar</button>
+        <button id="botonconfirmarDevolucion" onClick={() => eliminarReserva(reservaSeleccionada)}>Confirmar</button>
     </div>)
 }

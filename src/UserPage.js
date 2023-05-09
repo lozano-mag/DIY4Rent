@@ -22,6 +22,7 @@ export default function UserPage(props) {
 
     const [puntuacionMedia, setPuntuacionMedia] = useState(0);
     const [estrellas, setEstrellas] = useState("");
+    const [numeroValoraciones, setNumeroValoraciones] = useState(0);
 
     useEffect(() => {
         const puntuacionMediaUser = () => {
@@ -43,6 +44,8 @@ export default function UserPage(props) {
             }
 
         }
+        let puntuacionesFiltradasUserId = props.puntuaciones.filter(puntuacion => puntuacion.userId == user.id);
+        setNumeroValoraciones(puntuacionesFiltradasUserId.length);
         setPuntuacionMedia(puntuacionMediaUser());
     }, [user.id, props.puntuaciones]);
 
@@ -57,9 +60,11 @@ export default function UserPage(props) {
     return (<div>
         <div className="dashboardZona1">
             <img className="profilePhoto" src={user.fotoUser} width="250px" height="250px"></img>
-            <h2>{user.nombre}</h2>
-            <img height="40px" width="250px" src={estrellas}></img>
-            <p><b>Puntuación: {puntuacionMedia}</b></p>
+            <div id="dashboardDatos">
+                <h2>{user.nombre}</h2>
+                <img height="40px" width="250px" src={estrellas}></img>
+                <p><b>Número de valoraciones: {numeroValoraciones}</b></p>
+            </div>
         </div>
         <div id="otrasHerramientas">
             <p id="otrasHerramientasTitulo"><b>Otras herramientas publicadas por {user.nombre}:</b></p>

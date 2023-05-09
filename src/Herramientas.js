@@ -11,6 +11,7 @@ export default function Herramientas(props) {
     const [position, setPosition] = useState([1, 1]);
     const [puntuacionMedia, setPuntuacionMedia] = useState(0);
     const [estrellas, setEstrellas] = useState("");
+    const [numeroValoraciones, setNumeroValoraciones] = useState(0);
 
     const idLog = localStorage.getItem("idLog");
     let usuarioList = props.users.filter(user => user.id == idLog);
@@ -25,22 +26,22 @@ export default function Herramientas(props) {
     let propietarios = props.users.filter(user => user.id === herramienta.userId);
     let propietario = propietarios[0];
 
-const calculaDistancia = () => {
-    let dLat = (propietario.lat - usuarioLog.lat) * (Math.PI / 180);
-    let dLon = (propietario.lon - usuarioLog.lon) * (Math.PI / 180);
+    const calculaDistancia = () => {
+        let dLat = (propietario.lat - usuarioLog.lat) * (Math.PI / 180);
+        let dLon = (propietario.lon - usuarioLog.lon) * (Math.PI / 180);
 
-    const a =
-        Math.sin(dLat / 2) * Math.sin(dLat / 2) +
-        Math.cos(propietario.lat * (Math.PI / 180)) *
-        Math.cos(usuarioLog.lat * (Math.PI / 180)) *
-        Math.sin(dLon / 2) *
-        Math.sin(dLon / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-    
-    const dist = 6371 * c;
+        const a =
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(propietario.lat * (Math.PI / 180)) *
+            Math.cos(usuarioLog.lat * (Math.PI / 180)) *
+            Math.sin(dLon / 2) *
+            Math.sin(dLon / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-    return dist;
-}
+        const dist = 6371 * c;
+
+        return dist;
+    }
 
     useEffect(() => {
         async function getCoordinates(address) {
@@ -86,6 +87,8 @@ const calculaDistancia = () => {
                 return puntuacionMedia;
             }
         }
+        let puntuacionesFiltradasUserId = props.puntuaciones.filter(puntuacion => puntuacion.userId == propietario.id);
+        setNumeroValoraciones(puntuacionesFiltradasUserId.length);
         setPuntuacionMedia(puntuacionMediaUser());
     }, [propietario.id, props.puntuaciones]);
 
@@ -104,10 +107,11 @@ const calculaDistancia = () => {
                 <img id="fotoHerramientaPrincipal" src={herramienta.foto} height="500px" width='600px'></img>
                 <Link to={"/usuarios/" + propietario.id}>
                     <div id="iraUser">
-                        <img src={propietario.fotoUser} height="100px" width="100px"></img>
+                        <img id="fotoIraUser" src={propietario.fotoUser} height="100px" width="100px"></img>
                         <p><b>{propietario.nombre}</b></p>
+                        <button><b>Contactar</b></button>
                         <img src={estrellas}></img>
-                        <p><b>Puntuación: {puntuacionMedia}</b></p>
+                    <p><b>Número de valoraciones: {numeroValoraciones}</b></p>
                     </div>
                 </Link>
             </div>
@@ -124,10 +128,10 @@ const calculaDistancia = () => {
                 </div>
                 <p>{herramienta.descripcion}</p>
                 <p id="precio"><b>{herramienta.precio}€/dia</b></p>
-                <p>Ubicación:</p>
+                <p><b>Ubicación:</b></p>
                 {idLog ? <p>A <b>{calculaDistancia().toFixed(2)} Km</b> de ti</p> : <p>Inicia sesión para ver la distancia</p>}
                 <Mapa posicion={position} propietario={propietario} />
-                <p>Lista de reservas:</p>
+                <p><b>Lista de reservas:</b></p>
                 {props.reservas.map(reserva => {
                     if (reserva.herramientaId == herramienta.id && reserva.isPagado == true)
                         return (<div>

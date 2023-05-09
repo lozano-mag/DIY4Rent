@@ -1,6 +1,7 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import moment from "moment";
 
 export default function Alquilar(props) {
 
@@ -17,12 +18,23 @@ export default function Alquilar(props) {
     let herramienta = herramientas[0];
 
     const guardarReserva = () => {
-        if (!correoUsuarioReservado){
-            return(
-                alert("")
-            )
-        }
+        let stringFechaIni = `${anoIni}-${mesIni}-${diaIni}`;
+        let stringFechaFin = `${anoFin}-${mesFin}-${diaFin}`;
+        const fechaSeleccionadaIniObjeto = moment(stringFechaIni);
+        const fechaSeleccionadaFinObjeto = moment(stringFechaFin);
         let usuarioReservado = props.usuarios.filter(usuario => usuario.correo == correoUsuarioReservado);
+        let reservasHerramienta = props.reservas.filter(reserva => reserva.herramientaId == herramientaId);
+        reservasHerramienta.map((reserva) => {
+            const stringFechaInicio = `${reserva.anoIni}-${reserva.mesIni}-${reserva.diaIni}`;
+            const stringFechaFin = `${reserva.anoFin}-${reserva.mesFin}-${reserva.diaFin}`;
+            const fechaInicioObjeto = moment(stringFechaInicio);
+            const fechaFinObjeto = moment(stringFechaFin);
+            if (fechaSeleccionadaIniObjeto.isSameOrAfter(fechaInicioObjeto) &&
+                fechaSeleccionadaIniObjeto.isBefore(fechaFinObjeto) &&
+                fechaSeleccionadaFinObjeto.isAfter(fechaInicioObjeto)) {
+                return alert("Fecha usada");
+            }
+        })
         if (usuarioReservado.length == 0){
             return(
                 alert("Escribe un correo válido")
@@ -57,10 +69,12 @@ export default function Alquilar(props) {
     return (<div>
         <h2>Alquilar {herramienta.nombre}</h2>
         <img height="200px" width="200px" src={herramienta.foto}></img>
+        <div class="correoAlquilado">
         <label>Correo del alquilado</label>
-        <input onChange={e => setUsuarioReservado(e.target.value)}></input>
+        </div>
+        <input className="filtroPrecio" onChange={e => setUsuarioReservado(e.target.value)}></input>
         <p>Fecha de inicio del alquiler:</p>
-        <select onChange={e => setDiaIni(e.target.value)}>
+        <select className="botonDisponibilidadFecha" onChange={e => setDiaIni(e.target.value)}>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -92,8 +106,8 @@ export default function Alquilar(props) {
             <option>30</option>
             <option>31</option>
         </select>
-        <p>/</p>
-        <select onChange={e => setMesIni(e.target.value)}>
+
+        <select className="botonDisponibilidadFecha" onChange={e => setMesIni(e.target.value)}>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -107,14 +121,14 @@ export default function Alquilar(props) {
             <option>11</option>
             <option>12</option>
         </select>
-        <p>/</p>
-        <select onChange={e => setAnoIni(e.target.value)}>
+       
+        <select className="botonDisponibilidadFecha" onChange={e => setAnoIni(e.target.value)}>
             <option>2023</option>
             <option>2024</option>
             <option>2025</option>
         </select>
         <p>Fecha de fin del alquiler</p>
-        <select onChange={e => setDiaFin(e.target.value)}>
+        <select className="botonDisponibilidadFecha" onChange={e => setDiaFin(e.target.value)}>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -146,8 +160,8 @@ export default function Alquilar(props) {
             <option>30</option>
             <option>31</option>
         </select>
-        <p>/</p>
-        <select onChange={e => setMesFin(e.target.value)}>
+        
+        <select className="botonDisponibilidadFecha" onChange={e => setMesFin(e.target.value)}>
             <option>1</option>
             <option>2</option>
             <option>3</option>
@@ -161,12 +175,14 @@ export default function Alquilar(props) {
             <option>11</option>
             <option>12</option>
         </select>
-        <p>/</p>
-        <select onChange={e => setAnoFin(e.target.value)}>
+        
+        <select className="botonDisponibilidadFecha" onChange={e => setAnoFin(e.target.value)}>
             <option>2023</option>
             <option>2024</option>
             <option>2025</option>
         </select>
-        <button onClick={() => guardarReserva()}>Confirmar alquiler</button>
+        <div class="ButtonConfirmarAlquiler">
+        <button id="BotonConfirmarAlquiler" onClick={() => guardarReserva()}>Confirmar alquiler</button>
+        </div>
     </div>)
 }

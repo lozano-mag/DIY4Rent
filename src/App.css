@@ -2,31 +2,31 @@
   text-align: center;
 }
 
-#header{
+#header {
   width: 100%;
   overflow: hidden;
   background-color: #dde1e0;
 }
 
-#logotipo{
+#logotipo {
   width: 10%;
   float: left;
 }
 
-#botonesInicio{
+#botonesInicio {
   float: right;
   width: 20%;
   margin-top: 30px;
 }
 
-#botonesInicio button{
+#botonesInicio button {
   margin-left: 10px;
   background-color: #ed5c25;
   padding: 10px;
   border-radius: 10px;
 }
 
-#selectorCategorias{
+#selectorCategorias {
   margin-top: 20px;
   margin-right: 40px;
   padding: 10px;
@@ -34,7 +34,7 @@
   border-radius: 10px;
 }
 
-#listaHerramientas{
+#listaHerramientas {
   margin-top: 20px;
   display: flex;
   flex-flow: row wrap;
@@ -42,12 +42,11 @@
 }
 
 #barraBusqueda {
-  display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#filtroNombre{
+#filtroNombre {
   margin-top: 20px;
   width: 500px;
   padding: 10px;
@@ -55,7 +54,7 @@
   font-size: 16px;
 }
 
-#botonfiltroNombre{
+#botonfiltroNombre {
   margin-top: 20px;
   width: 100px;
   height: 40px;
@@ -68,18 +67,18 @@
   cursor: pointer;
 }
 
-.imagenHerramienta{
+.imagenHerramienta {
   height: 290px;
 }
 
-.tarjeta img{
+.tarjeta img {
   margin-top: 10px;
   height: 280px;
   width: 280px;
   border-radius: 10px;
 }
 
-.tarjeta{
+.tarjeta {
   height: 350px;
   width: 300px;
   margin: 10px;
@@ -90,7 +89,7 @@
   padding-bottom: 70px;
 }
 
-.tarjeta p{
+.tarjeta p {
   color: black;
 }
 
@@ -108,27 +107,27 @@
   text-align: left;
 }
 
-#fotoHerramientaPrincipal{
+#fotoHerramientaPrincipal {
   margin-top: 30px;
   margin-right: 80px;
   border-radius: 10px;
 }
 
-#precio{
+#precio {
   font-size: 30px;
 }
 
-#encabezadoPagHerramienta{
+#encabezadoPagHerramienta {
   display: flex;
   flex: wrap;
 }
 
-#encabezadoPagHerramienta p{
+#encabezadoPagHerramienta p {
   margin-top: 28px;
   margin-left: 70px;
 }
 
-#iraUser{
+#iraUser {
   display: flex;
   flex-flow: row wrap;
   margin-left: 120px;
@@ -136,19 +135,32 @@
   width: 400px;
 }
 
-#iraUser img{
+#fotoIraUser {
+  margin-bottom: 20px;
   border-radius: 50px;
   border: solid #ed5c25;
 }
 
-#iraUser p{
+#iraUser p {
   font-size: 18px;
   margin-top: 42px;
   margin-left: -50px;
   flex-basis: 50%;
 }
 
-#listaRecomendados{
+#iraUser button{
+  color: white;
+  font-size: 15px;
+  margin-top: 35px;
+  height: 50px;
+  width: 100px;
+  margin-left: 5px;
+  background-color: #ed5c25;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+#listaRecomendados {
   margin-top: 30px;
   margin-left: 100px;
   background-color: #f1f3f2;
@@ -156,41 +168,41 @@
   border-radius: 20px;
 }
 
-#introRecomendados{
+#introRecomendados {
   margin-right: -10px;
 }
 
-#tarjetasRecomendados{
+#tarjetasRecomendados {
   margin-left: 40px;
 }
 
-.inputsforms{
+.inputsforms {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.inputsforms input{
+.inputsforms input {
   width: 200px;
 }
 
-.mapa{
+.mapa {
   width: 500px;
   height: 300px;
 }
 
-.login h2{
+.login h2 {
   font-size: 40px;
 }
 
-.formularioLogin{
+.formularioLogin {
   background-color: #dde1e0;
   width: 25%;
   margin: auto;
   border-radius: 20px;
 }
 
-.formularioEditar{
+.formularioEditar {
   background-color: #dde1e0;
   width: 35%;
   margin: auto;
@@ -199,29 +211,29 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  
+
 }
 
-.formularioEditar label{
+.formularioEditar label {
   margin-top: 25px;
   flex: 1;
   margin-right: 10px;
   text-align: left;
 }
 
-.formularioEditar input{
+.formularioEditar input {
   margin-top: 20px;
   width: 300px;
   height: 25px;
   border-radius: 10px;
-  
+
 }
 
-#editarUsuario h2{
+#editarUsuario h2 {
   font-size: 40px;
 }
 
-.formularioLogin input{
+.formularioLogin input {
   margin-top: 20px;
   width: 300px;
   height: 25px;
@@ -229,7 +241,7 @@
 }
 
 
-.loginRegister{
+.loginRegister {
   margin-top: 30px;
   margin-bottom: 40px;
   margin-right: 30px;
@@ -245,7 +257,7 @@
   cursor: pointer;
 }
 
-.registerSignIn{
+.registerSignIn {
   margin-top: 30px;
   margin-top: 20px;
   width: 100px;
@@ -258,7 +270,7 @@
   cursor: pointer;
 }
 
-.loginEnter{
+.loginEnter {
   margin-top: 30px;
   margin-bottom: 40px;
   margin-top: 20px;
@@ -272,45 +284,45 @@
   cursor: pointer;
 }
 
-#registro h2{
+#registro h2 {
   font-size: 40px;
 }
 
-.inputEditar{
+.inputEditar {
   display: flex;
   flex-direction: row;
 }
 
-#dashboard{
+#dashboard {
   display: flex;
   flex-direction: column;
 }
 
-.dashboardZona1{
+.dashboardZona1 {
   margin-top: 40px;
   display: flex;
   flex-direction: row;
 }
 
-.dashboardZona1 img{
+.dashboardZona1 img {
   margin-left: 80px;
 }
 
-#dashboardDatos{
+#dashboardDatos {
   margin-left: 40px;
 }
 
-#dashboardDatos h2{
+#dashboardDatos h2 {
   font-size: 40px;
 }
 
-#subirDashboard{
+#subirDashboard {
   margin-top: 75px;
-  text-align: right ;
+  text-align: right;
   margin-right: 100px;
 }
 
-.loginSubirDashboard{
+.loginSubirDashboard {
   margin-top: 30px;
   margin-bottom: 40px;
   margin-top: 20px;
@@ -324,7 +336,7 @@
   cursor: pointer;
 }
 
-#dashboardZona2{
+#dashboardZona2 {
   margin-top: 40px;
   text-align: left;
   margin-left: 80px;
@@ -333,15 +345,15 @@
   margin-right: 80px;
 }
 
-#dashboardZona2 p{
+#dashboardZona2 p {
   margin-left: 20px;
 }
 
-#tituloDashboardZona2{
+#tituloDashboardZona2 {
   font-size: 20px;
 }
 
-#dashboardZona3{
+#dashboardZona3 {
   margin-top: 40px;
   text-align: left;
   margin-left: 80px;
@@ -350,16 +362,16 @@
   margin-right: 80px;
 }
 
-#dashboardZona3 img{
+#dashboardZona3 img {
   border-radius: 10px;
 }
 
-#tituloDashboardZona3{
+#tituloDashboardZona3 {
   margin-left: 20px;
   font-size: 20px;
 }
 
-.herramientaLista{
+.herramientaLista {
   margin-top: 20px;
   display: flex;
   align-items: center;
@@ -367,26 +379,26 @@
   margin-bottom: 20px;
 }
 
-.herramientaLista p{
+.herramientaLista p {
   margin-left: 35px;
 }
 
-.botonesListaMisHerramientas{
+.botonesListaMisHerramientas {
   margin-top: 20px;
   margin-left: 100px;
   float: right;
 }
 
-.botonesListaMisHerramientas button{
+.botonesListaMisHerramientas button {
   margin-right: 40px;
 }
 
-.profilePhoto{
+.profilePhoto {
   border-radius: 1000px;
   border: solid gainsboro;
 }
 
-#otrasHerramientas{
+#otrasHerramientas {
   margin-top: 70px;
   background-color: #f1f3f2;
   margin-left: 50px;
@@ -394,27 +406,27 @@
   border-radius: 20px;
 }
 
-#otrasHerramientasTitulo{
+#otrasHerramientasTitulo {
   text-align: left;
   margin-left: 60px;
   font-size: 20px;
 }
 
-#otrasHerramientasTarjetas{
+#otrasHerramientasTarjetas {
   margin-top: 40px;
 }
 
-.SelectorEditar{
+.SelectorEditar {
   margin-top: 20px;
 }
 
-.SelectorEditar select{
+.SelectorEditar select {
   width: 90px;
   height: 30px;
   border-radius: 10px;
 }
 
-#filtroPrecio{
+.filtroPrecio {
   margin-top: 20px;
   width: 200px;
   padding: 10px;
@@ -422,7 +434,7 @@
   font-size: 16px;
 }
 
-#botonFiltroPrecio{
+.botonFiltroPrecio {
   margin-top: 20px;
   width: 100px;
   height: 40px;
@@ -434,4 +446,182 @@
   color: white;
   font-size: 16px;
   cursor: pointer;
+}
+
+.botonDisponibilidadFecha {
+  margin-top: 20px;
+  width: 70px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ed5c25;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+
+#botonFechasAlquiler {
+  margin-top: 20px;
+  width: 60px;
+  height: 20px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #ed5c25;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+#BotonFiltrarDisponibilidad {
+  margin-top: 20px;
+  width: 100px;
+  height: 40px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+#BotonConfirmarAlquiler {
+  margin-top: 20px;
+  width: 100px;
+  height: 40px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: black;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  align-self: middle;
+}
+
+.Desde {
+  display: flex;
+}
+
+.Hasta {
+  display: flex;
+}
+
+.DesdeyHasta {
+  display: flex;
+  justify-content: center;
+}
+
+.ButtonConfirmarAlquiler {
+  justify-content: center;
+}
+
+.correoAlquilado {
+  justify-content: center;
+}
+
+#botonPagar {
+  margin-top: 20px;
+  width: 80px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: green;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+#botonEliminar {
+  margin-top: 20px;
+  width: 80px;
+  height: 30px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: red;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+#botonValorar {
+  margin-top: 20px;
+  width: 80px;
+  height: 40px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #ed5c25;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+#botonconfirmarDevolucion {
+  margin-top: 20px;
+  width: 80px;
+  height: 20px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 20px;
+  border: none;
+  background-color: #ed5c25;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+.alquiladaEnPrestamo {
+  background-color: rgb(238, 238, 238);
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 15px;
+}
+
+.alquiladaEnPrestamo button{
+  margin-bottom: 20px;
+  width: 80px;
+  height: 20px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 5px;
+  border: none;
+  background-color: #ed5c25;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  flex-direction: row;
+}
+
+#alquiladaEnPrestamoBoton {
+  margin-bottom: 20px;
+  width: 80px;
+  height: 50px;
+  margin-left: 10px;
+  margin-right: 20px;
+  border-radius: 10px;
+  border: none;
+  background-color: #ed5c25;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  flex-direction: row;
 }
